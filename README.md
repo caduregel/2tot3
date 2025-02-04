@@ -1,50 +1,25 @@
-# React + TypeScript + Vite
+# 2 tot 3
+This project is a service which can split up a large list of students into two balanced groups. The project is currently setup to do the following:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Take in a single list of students, where each student can have the following properties:
+- The student's name.
+- The student's gender.
+- The student's cognitive level.
+- The students social level.
+- Three friends with whom the student would prefer to be grouped with.
 
-Currently, two official plugins are available:
+After all the students have been input by a teacher, the list of students can be split into two groups, which the service attempts to give the following properties:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Every student has at least one friend they prefered to be grouped with.
+- The groups dont differ to much in size
+- The groups dont differ to much in average cognitive and social levels of the students.
+- The groups dont differ to much in the ammount of boys/girls in each group
 
-## Expanding the ESLint configuration
+# Run this project locally
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+If you wish to run this project locally, you can do so like this:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone this github repository
+2. Run `npm install`
+3. Run `npm run dev`
+4. Visit [http://localhost:5173/] to view the project.
