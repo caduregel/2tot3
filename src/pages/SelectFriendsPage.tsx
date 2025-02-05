@@ -30,7 +30,6 @@ function SelectFriendsPage() {
         newStudents[currentStudent] = newStudent
         setStudents(newStudents)
     }
-
     return (
 
         <div className="grid grid-cols-1 justify-items-center">
@@ -39,19 +38,22 @@ function SelectFriendsPage() {
             <p className="mt-3">friend one: </p>
             <SearchStudentsDropdown
                 currentStudentIndex={currentStudent}
-                SelectorIndex={0} students={students}
+                SelectorIndex={0} 
+                students={students}
                 handleAddFriend={handleAddFriend} />
 
             <p>friend two: </p>
             <SearchStudentsDropdown
                 currentStudentIndex={currentStudent}
-                SelectorIndex={1} students={students}
+                SelectorIndex={1} 
+                students={students}
                 handleAddFriend={handleAddFriend} />
 
             <p>friend three: </p>
             <SearchStudentsDropdown
                 currentStudentIndex={currentStudent}
-                SelectorIndex={2} students={students}
+                SelectorIndex={2} 
+                students={students}
                 handleAddFriend={handleAddFriend} />
 
             <div>

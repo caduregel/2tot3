@@ -33,7 +33,7 @@ function Home() {
       cognitive: 0,
       social: 0,
       gender: "boy",
-      friends: [0, 0, 0],
+      friends: [],
     })
 
     setStudents(newStudents)
@@ -74,6 +74,7 @@ function Home() {
           editStudent={editStudent}
           finalStudent={index == students.length - 1 && index != 0}
           deleteStudent={deleteStudent}
+          students={students}
         />
       })}
 
