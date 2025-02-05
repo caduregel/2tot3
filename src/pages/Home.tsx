@@ -6,11 +6,11 @@ import { Link } from "react-router-dom"
 
 function Home() {
   const [students, setStudents] = useState<IStudent[]>(
-    localStorage.getItem('students')
-      ? JSON.parse(localStorage.getItem('students') || '{}')
+    localStorage.getItem("students")
+      ? JSON.parse(localStorage.getItem("students") || "{}")
       : [{
         index: 0,
-        name: '',
+        name: "",
         cognitive: 0,
         social: 0,
         gender: "boy",
@@ -24,7 +24,7 @@ function Home() {
 
     newStudents.push({
       index: newStudents.length,
-      name: '',
+      name: "",
       cognitive: 0,
       social: 0,
       gender: "boy",
@@ -49,7 +49,7 @@ function Home() {
 
 
   useEffect(() => {
-    localStorage.setItem('students', JSON.stringify(students))
+    localStorage.setItem("students", JSON.stringify(students))
   }, [students])
 
   const addFriendsDialog = () => {
@@ -100,7 +100,7 @@ function Home() {
               Cancel</button>
             <Link
               className="bg-emerald-200 p-2.5 rounded-sm hover:bg-emerald-300 hover:cursor-pointer"
-              to={'/select-friends'}>
+              to={"/select-friends"}>
               begin</Link>
           </div>
         </div>

@@ -2,8 +2,12 @@ import { useEffect, useState } from "react"
 import { IStudent } from "../interfaces/studentInterface"
 
 function SelectFriendsPage() {
-    const [students] = useState<IStudent[]>(JSON.parse(localStorage.getItem('students') || '{}'))
-    const [currentStudent, setCurrentStudent] = useState<number>(JSON.parse(localStorage.getItem('currentStudent') || '{0}'))
+    const [students] = useState<IStudent[]>(JSON.parse(localStorage.getItem("students") || "{}"))
+    const [currentStudent, setCurrentStudent] = useState<number>(
+        localStorage.getItem('currentStudent')
+            ? JSON.parse(localStorage.getItem('currentStudent') || "{0}")
+            : 0 )
+
 
     useEffect(() => {
         localStorage.setItem('currentStudent', JSON.stringify(currentStudent))
