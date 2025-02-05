@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { IStudent } from "../interfaces/studentInterface"
 import AddStudentCard from "../components/AddStudentCard"
+import { Link } from "react-router-dom"
 
 
 function Home() {
   const [students, setStudents] = useState<IStudent[]>(
-    localStorage.getItem('students') ? JSON.parse(localStorage.getItem('students')  || '{}') :
-      [{
+    localStorage.getItem('students')
+      ? JSON.parse(localStorage.getItem('students') || '{}')
+      : [{
         index: 0,
         name: '',
         cognitive: 0,
         social: 0,
         gender: "boy",
+        friends: [],
       }])
+
+  const addFriendsDialogRef = useRef<HTMLDialogElement>(null)
 
   const addStudent = () => {
     let newStudents = [...students]
@@ -23,6 +28,7 @@ function Home() {
       cognitive: 0,
       social: 0,
       gender: "boy",
+      friends: [],
     })
 
     setStudents(newStudents)
@@ -46,8 +52,14 @@ function Home() {
     localStorage.setItem('students', JSON.stringify(students))
   }, [students])
 
-  const addFriends = () => {
-    console.log('to be made')
+  const addFriendsDialog = () => {
+    if (!addFriendsDialogRef.current) {
+      return
+    }
+    addFriendsDialogRef.current.hasAttribute("open")
+      ? addFriendsDialogRef.current.close()
+      : addFriendsDialogRef.current.showModal()
+
   }
 
   return (
@@ -68,10 +80,33 @@ function Home() {
         onClick={addStudent}>
         Add student</button>
 
-      <button className="bg-lime-200 p-2 rounded-sm hover:bg-lime-300 m-4 hover:cursor-pointer" onClick={addFriends}>Add student's friends</button>
-
+      <button className="bg-lime-200 p-2 rounded-sm hover:bg-lime-300 m-4 hover:cursor-pointer" onClick={addFriendsDialog}>Add student's friends</button>
+      <dialog
+        ref={addFriendsDialogRef}
+        className="p-6 rounded-lg shadow-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div>
+          <h1 className="font-bold">Assign Student Friendships</h1>
+          <p>Now that you have entered all student information, it’s time to let each student select their preferred groupmates. </p>
+          <br />
+          <ol className="list-decimal ml-6">
+            <li>Call a student over and ask them to choose the classmates they would like to be grouped with.</li>
+            <li>Once the student has made their selections, confirm and proceed to the next student.</li>
+            <li>Repeat until all students have provided their choices.</li>
+          </ol>
+          <div className="text-right">
+            <button
+              className="bg-red-200 p-2 rounded-sm hover:bg-red-300 hover:cursor-pointer mr-2"
+              onClick={addFriendsDialog}>
+              Cancel</button>
+            <Link
+              className="bg-emerald-200 p-2.5 rounded-sm hover:bg-emerald-300 hover:cursor-pointer"
+              to={'/select-friends'}>
+              begin</Link>
+          </div>
+        </div>
+      </dialog>
     </>
   )
 }
 
-export default Home
+export default Home 

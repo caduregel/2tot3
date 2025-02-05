@@ -5,4 +5,5 @@ export interface IStudent {
     cognitive: number,
     social: number,
     gender: string,
+    friends: string[],
 }

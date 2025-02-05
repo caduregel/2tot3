@@ -4,6 +4,7 @@ import ErrorPage from "./pages/ErrorPage";
 import AboutPage from './pages/About.tsx';
 import Home from "./pages/Home.tsx";
 import HowToPage from "./pages/HowToPage.tsx";
+import SelectFriendsPage from "./pages/selectFriendsPage.tsx";
 
 const routes = [
     {
@@ -23,6 +24,10 @@ const routes = [
                 path: '/how-to',
                 element: <HowToPage />
             },
+            {
+                path: '/select-friends',
+                element: <SelectFriendsPage />
+            }
         ]
     },
 
