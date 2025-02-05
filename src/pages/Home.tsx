@@ -19,6 +19,11 @@ function Home() {
 
   const addFriendsDialogRef = useRef<HTMLDialogElement>(null)
 
+  useEffect(() => {
+    localStorage.setItem("students", JSON.stringify(students))
+  }, [students])
+
+  // console.log(students)
   const addStudent = () => {
     let newStudents = [...students]
 
@@ -28,7 +33,7 @@ function Home() {
       cognitive: 0,
       social: 0,
       gender: "boy",
-      friends: [],
+      friends: [0, 0, 0],
     })
 
     setStudents(newStudents)
@@ -48,9 +53,6 @@ function Home() {
   }
 
 
-  useEffect(() => {
-    localStorage.setItem("students", JSON.stringify(students))
-  }, [students])
 
   const addFriendsDialog = () => {
     if (!addFriendsDialogRef.current) {
