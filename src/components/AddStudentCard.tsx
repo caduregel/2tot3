@@ -45,13 +45,13 @@ const AddStudentCard: FC<Props> = ({ student, editStudent, finalStudent, deleteS
             <p className="mr-1">Social level: </p>
             <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="number" max="5" min="0" value={student.social} onChange={handleSocialChange} />
 
-            <select className="bg-gray-200 mr-5 p-1 rounded-sm" value={student.gender} onChange={handleGenderChange}>
+            <select className="bg-gray-200 mr-5 p-1 rounded-sm hover:cursor-pointer" value={student.gender} onChange={handleGenderChange}>
                 <option value="boy">Boy</option>
                 <option value="girl">Girl</option>
             </select>
 
             {finalStudent ?
-                <button className="bg-red-300 p-1 rounded-sm hover:cursor-pointer" onClick={() => { deleteStudent() }}>Remove Student</button> : null}
+                <button className="bg-red-200 p-1 rounded-sm hover:cursor-pointer hover:bg-red-300" onClick={() => { deleteStudent() }}>Remove Student</button> : null}
         </div>
     )
 }
