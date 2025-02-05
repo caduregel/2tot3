@@ -1,10 +1,9 @@
-
 import App from "./App";
 import ErrorPage from "./pages/ErrorPage";
 import AboutPage from './pages/About.tsx';
 import Home from "./pages/Home.tsx";
 import HowToPage from "./pages/HowToPage.tsx";
-import SelectFriendsPage from "./pages/selectFriendsPage.tsx";
+import SelectFriendsPage from "./pages/SelectFriendsPage.tsx";
 
 const routes = [
     {
