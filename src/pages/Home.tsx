@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { IStudent } from "../interfaces/studentInterface"
 import AddStudentCard from "../components/AddStudentCard"
 import { Link } from "react-router-dom"
+import { randomNames } from "../assets/randomNames"
 
 
 function Home() {
@@ -11,8 +12,8 @@ function Home() {
       : [{
         index: 0,
         name: "",
-        cognitive: 0,
-        social: 0,
+        cognitive: 1,
+        social: 1,
         gender: "boy",
         friends: [],
       }])
@@ -30,8 +31,8 @@ function Home() {
     newStudents.push({
       index: newStudents.length,
       name: "",
-      cognitive: 0,
-      social: 0,
+      cognitive: 1,
+      social: 1,
       gender: "boy",
       friends: [],
     })
@@ -52,8 +53,6 @@ function Home() {
     setStudents(newStudents)
   }
 
-
-
   const addFriendsDialog = () => {
     if (!addFriendsDialogRef.current) {
       return
@@ -64,9 +63,37 @@ function Home() {
 
   }
 
+  const fillRandom = () => {
+    const getRandomInt = (max: number) => {
+      return Math.floor(Math.random() * max);
+    }
+    const randStudents = []
+    const maxStudents = 50
+    for (let i = 0; i < maxStudents; i++) {
+      const randName = randomNames[getRandomInt(randomNames.length)]
+      const randCog = getRandomInt(5) + 1
+      const randSocial = getRandomInt(5) + 1
+      const randGender = Math.random() ? "boy" : "girl"
+      const randFriends = [getRandomInt(maxStudents), getRandomInt(maxStudents), getRandomInt(maxStudents)]
+      const newRandStuden = {
+        index: i,
+        name: randName,
+        cognitive: randCog,
+        social: randSocial,
+        gender: randGender,
+        friends: randFriends,
+      }
+      randStudents.push(newRandStuden)
+    }
+    setStudents(randStudents)
+  }
+
   return (
     <>
-      <p className="m-4 text-xl">You currently have {students.length} {students.length == 1 ? "student" : "students"}</p>
+      <div className="flex items-center">
+        <p className="m-4 text-xl">You currently have {students.length} {students.length == 1 ? "student" : "students"}</p>
+        <button className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer" onClick={fillRandom}>Fill In Randomly</button>
+      </div>
       {students.map((student, index) => {
         return <AddStudentCard
           key={index}

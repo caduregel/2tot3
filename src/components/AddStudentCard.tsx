@@ -18,14 +18,14 @@ const AddStudentCard: FC<Props> = ({ student, editStudent, finalStudent, deleteS
         editStudent(newStudent)
     }
     const handleCognitiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (Number(event.target.value) <= 5 && Number(event.target.value) >= 0) {
+        if (Number(event.target.value) <= 5 && Number(event.target.value) >= 1) {
             const newStudent = { ...student }
             newStudent.cognitive = Number(event.target.value)
             editStudent(newStudent)
         }
     }
     const handleSocialChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (Number(event.target.value) <= 5 && Number(event.target.value) >= 0) {
+        if (Number(event.target.value) <= 5 && Number(event.target.value) >= 1) {
             const newStudent = { ...student }
             newStudent.social = Number(event.target.value)
             editStudent(newStudent)
@@ -48,10 +48,10 @@ const AddStudentCard: FC<Props> = ({ student, editStudent, finalStudent, deleteS
             <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="text" value={student.name} onChange={handleNameChange} />
 
             <p >Cognitive level: </p>
-            <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="number" max="5" min="0" value={student.cognitive} onChange={handleCognitiveChange} />
+            <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="number" max="5" min="1" value={student.cognitive} onChange={handleCognitiveChange} />
 
             <p className="mr-1">Social level: </p>
-            <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="number" max="5" min="0" value={student.social} onChange={handleSocialChange} />
+            <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="number" max="5" min="1" value={student.social} onChange={handleSocialChange} />
 
             <select className="bg-gray-200 mr-5 p-1 rounded-sm hover:cursor-pointer" value={student.gender} onChange={handleGenderChange}>
                 <option value="boy">Boy</option>
