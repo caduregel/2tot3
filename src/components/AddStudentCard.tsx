@@ -42,7 +42,6 @@ const AddStudentCard: FC<Props> = ({ student, editStudent, finalStudent, deleteS
         newStudents[student.index] = newStudent
         editStudent(newStudents)
     }
-    console.log(String(student.friends[0]))
     return (
         <div className="flex p-3 items-center bg-gray-50 mb-3">
             <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="text" value={student.name} onChange={handleNameChange} />

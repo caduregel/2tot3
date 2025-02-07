@@ -73,7 +73,7 @@ function Home() {
       const randName = randomNames[getRandomInt(randomNames.length)]
       const randCog = getRandomInt(5) + 1
       const randSocial = getRandomInt(5) + 1
-      const randGender = Math.random() ? "boy" : "girl"
+      const randGender = Math.random() < 0.5 ? "boy" : "girl"
       const randFriends = [getRandomInt(maxStudents), getRandomInt(maxStudents), getRandomInt(maxStudents)]
       const newRandStuden = {
         index: i,
@@ -106,10 +106,11 @@ function Home() {
         <button className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer" onClick={fillRandom}>Fill In Randomly</button>
         <button className="bg-red-200 p-2 rounded-sm hover:cursor-pointer hover:bg-red-300"
           onClick={resetStudents}>Clear Students</button>
-        {students.length > 10
-          ? <Link className="bg-lime-200 p-2 rounded-sm hover:bg-lime-300 m-4 hover:cursor-pointer"
+        {students.length >= 20
+          ? <Link className="bg-lime-200 p-2 rounded-sm m-4 hover:cursor-pointer"
             to='/sorting' >Sort Students</Link>
-          : null}
+          : <button disabled className="bg-lime-100 p-2 rounded-sm m-4 "
+           >Please enter atleast 20 students before sorting</button>}
 
       </div>
       {students.map((student, index) => {

@@ -31,7 +31,6 @@ function SelectFriendsPage() {
         newStudents[currentStudent] = newStudent
         setStudents(newStudents)
     }
-    console.log(currentStudent, students.length - 1)
     return (
 
         <div className="grid grid-cols-1 justify-items-center">
