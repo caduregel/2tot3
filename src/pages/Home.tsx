@@ -88,11 +88,25 @@ function Home() {
     setStudents(randStudents)
   }
 
+  const resetStudents = () => {
+    setStudents([{
+      index: 0,
+      name: "",
+      cognitive: 1,
+      social: 1,
+      gender: "boy",
+      friends: [],
+    }])
+  }
+
   return (
     <>
       <div className="flex items-center">
         <p className="m-4 text-xl">You currently have {students.length} {students.length == 1 ? "student" : "students"}</p>
         <button className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer" onClick={fillRandom}>Fill In Randomly</button>
+        <button className="bg-red-200 p-2 rounded-sm hover:cursor-pointer hover:bg-red-300"
+          onClick={resetStudents}>Clear Students</button>
+
       </div>
       {students.map((student, index) => {
         return <AddStudentCard
