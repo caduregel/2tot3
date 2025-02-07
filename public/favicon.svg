@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <circle cx="16" cy="16" r="15" fill="#4A90E2"/>
+  
+  <!-- Sorting bars representation -->
+  <rect x="8" y="8" width="4" height="8" fill="white"/>
+  <rect x="14" y="8" width="4" height="12" fill="white"/>
+  <rect x="20" y="8" width="4" height="16" fill="white"/>
+  
+  <!-- Arrow indicating direction -->
+  <path d="M6 22 L16 26 L26 22" stroke="white" stroke-width="2" fill="none"/>
+</svg>

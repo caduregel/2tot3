@@ -30,9 +30,6 @@ const SearchStudentsDropdown: FC<Props> = ({ students, handleAddFriend, currentS
             alreadyChosen.push(friendId)
         }
     })
-    console.log(students[currentStudentIndex].friends[SelectorIndex]
-    )
-
   
     return (
         <div className="m-2">
