@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { IStudent } from "../interfaces/studentInterface"
 import SearchStudentsDropdown from "../components/SearchStudentsDropdown"
+import { Link } from "react-router-dom"
 
 function SelectFriendsPage() {
     const [students, setStudents] = useState<IStudent[]>(JSON.parse(localStorage.getItem("students") || "{}"))
@@ -30,6 +31,7 @@ function SelectFriendsPage() {
         newStudents[currentStudent] = newStudent
         setStudents(newStudents)
     }
+    console.log(currentStudent, students.length - 1)
     return (
 
         <div className="grid grid-cols-1 justify-items-center">
@@ -38,21 +40,21 @@ function SelectFriendsPage() {
             <p className="mt-3">friend one: </p>
             <SearchStudentsDropdown
                 currentStudentIndex={currentStudent}
-                SelectorIndex={0} 
+                SelectorIndex={0}
                 students={students}
                 handleAddFriend={handleAddFriend} />
 
             <p>friend two: </p>
             <SearchStudentsDropdown
                 currentStudentIndex={currentStudent}
-                SelectorIndex={1} 
+                SelectorIndex={1}
                 students={students}
                 handleAddFriend={handleAddFriend} />
 
             <p>friend three: </p>
             <SearchStudentsDropdown
                 currentStudentIndex={currentStudent}
-                SelectorIndex={2} 
+                SelectorIndex={2}
                 students={students}
                 handleAddFriend={handleAddFriend} />
 
@@ -60,9 +62,16 @@ function SelectFriendsPage() {
                 <button
                     className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
                     onClick={() => { handleStudentChange(false) }}> ← Previous Student</button>
-                <button
-                    className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
-                    onClick={() => { handleStudentChange(true) }}>Next Student →</button>
+                {currentStudent == students.length - 1
+                    ? <Link
+                    to="/"
+                    className="bg-gray-200 p-2.5 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
+                    onClick={() => { handleStudentChange(true) }}>Done</Link>
+                    : <button
+                        className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
+                        onClick={() => { handleStudentChange(true) }}>Next Student →</button>
+                }
+
             </div>
         </div>
     )

@@ -4,6 +4,7 @@ import AboutPage from './pages/About.tsx';
 import Home from "./pages/Home.tsx";
 import HowToPage from "./pages/HowToPage.tsx";
 import SelectFriendsPage from "./pages/SelectFriendsPage.tsx";
+import SortStudentsPage from "./pages/SortStudentsPage.tsx";
 
 const routes = [
     {
@@ -26,7 +27,11 @@ const routes = [
             {
                 path: '/select-friends',
                 element: <SelectFriendsPage />
-            }
+            },
+            {
+                path: '/sorting',
+                element: <SortStudentsPage />
+            },
         ]
     },
 

@@ -106,6 +106,10 @@ function Home() {
         <button className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer" onClick={fillRandom}>Fill In Randomly</button>
         <button className="bg-red-200 p-2 rounded-sm hover:cursor-pointer hover:bg-red-300"
           onClick={resetStudents}>Clear Students</button>
+        {students.length > 10
+          ? <Link className="bg-lime-200 p-2 rounded-sm hover:bg-lime-300 m-4 hover:cursor-pointer"
+            to='/sorting' >Sort Students</Link>
+          : null}
 
       </div>
       {students.map((student, index) => {
