@@ -1,6 +1,6 @@
 import { IStudent } from "../../interfaces/studentInterface";
 
-interface IStats {
+export interface IStats {
     groepsGrote: number,
     jongens: number,
     meisjes: number,

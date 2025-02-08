@@ -2,6 +2,7 @@ import shuffle from '../helpers/shuffle';
 import { checkTwoFriends, checkFriendInGroup } from '../helpers/checks';
 import testFunction from '../helpers/test';
 import { IStudent } from '../../interfaces/studentInterface';
+import { IGroups } from '../../interfaces/groupsInterface';
 
 function stepOne(astudents: IStudent[]) {
     let groupOne = [];
@@ -55,7 +56,7 @@ function stepOne(astudents: IStudent[]) {
     return [groupOne, groupTwo];
 }
 
-const sortStudents = (allStudents: IStudent[]) => {
+const sortStudents = (allStudents: IStudent[]): IGroups => {
     let allFriends = false;
     let acceptableSizes = false
     let acceptableGenderDif = false

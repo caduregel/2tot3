@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { IStudent } from "../interfaces/studentInterface"
 import AddStudentCard from "../components/AddStudentCard"
 import { Link } from "react-router-dom"
-import { randomNames } from "../assets/randomNames"
+import { generateRandomStudents } from "../helpers/generateRandomStudents"
 
 
 function Home() {
@@ -64,27 +64,7 @@ function Home() {
   }
 
   const fillRandom = () => {
-    const getRandomInt = (max: number) => {
-      return Math.floor(Math.random() * max);
-    }
-    const randStudents = []
-    const maxStudents = 50
-    for (let i = 0; i < maxStudents; i++) {
-      const randName = randomNames[getRandomInt(randomNames.length)]
-      const randCog = getRandomInt(5) + 1
-      const randSocial = getRandomInt(5) + 1
-      const randGender = Math.random() < 0.5 ? "boy" : "girl"
-      const randFriends = [getRandomInt(maxStudents), getRandomInt(maxStudents), getRandomInt(maxStudents)]
-      const newRandStuden = {
-        index: i,
-        name: randName,
-        cognitive: randCog,
-        social: randSocial,
-        gender: randGender,
-        friends: randFriends,
-      }
-      randStudents.push(newRandStuden)
-    }
+    const randStudents = generateRandomStudents(50)
     setStudents(randStudents)
   }
 
@@ -107,7 +87,7 @@ function Home() {
         <button className="bg-red-200 p-2 rounded-sm hover:cursor-pointer hover:bg-red-300"
           onClick={resetStudents}>Clear Students</button>
         {students.length >= 20
-          ? <Link className="bg-lime-200 p-2 rounded-sm m-4 hover:cursor-pointer"
+          ? <Link className="bg-lime-200 hover:bg-lime-300 p-2 rounded-sm m-4 hover:cursor-pointer"
             to='/sorting' >Sort Students</Link>
           : <button disabled className="bg-lime-100 p-2 rounded-sm m-4 "
            >Please enter atleast 20 students before sorting</button>}
