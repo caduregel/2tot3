@@ -94,7 +94,7 @@ function Home() {
           ? <Link className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-sm m-4 hover:cursor-pointer"
             to='/sorting' >Sorteer</Link>
           : <button disabled className="bg-blue-400 text-white p-2 rounded-sm m-4 "
-          >Please enter atleast 20 students before sorting</button>}
+          >Vul tenminste 20 leerlingen in</button>}
 
       </div>
       {students.map((student, index) => {

@@ -44,7 +44,7 @@ const AddStudentCard: FC<Props> = ({ student, editStudent, finalStudent, deleteS
     }
     return (
         <div className="flex p-3 items-center bg-gray-50 mb-3 pl-5">
-            <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="text" value={student.name} onChange={handleNameChange} />
+            <input className="bg-gray-200 mr-5 p-1 rounded-sm"  placeholder="leerling naam..." type="text" value={student.name} onChange={handleNameChange} />
 
             <p className="mr-3">Cognitief: </p>
             <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="number" max="5" min="1" value={student.cognitive} onChange={handleCognitiveChange} />
