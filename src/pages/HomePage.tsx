@@ -31,7 +31,7 @@ const HomePage = () => {
                 <ul className="flex list-none">
                     <li className="mr-8 flex flex-col items-center">
                         <img src="/clock-icon.svg" alt="" className="w-30 h-30 rounded-full mb-2" />
-                        <p>tijdbesparend</p>
+                        <p>Tijdbesparend</p>
                         {/* {Hidden needs to be hover} */}
                         <p className="hidden">Het samenstellen van nieuwe klassen kost normaal gesproken uren of zelfs dagen. Ons slimme algoritme doet dit werk in enkele minuten, terwijl het rekening houdt met alle belangrijke factoren.</p>
                     </li>

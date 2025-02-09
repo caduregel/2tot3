@@ -49,7 +49,7 @@ const MeerInfoPage = () => {
 
             </div>
             <div className="flex justify-between items-center mt-10 mb-10 ml-60 mr-60 bg-blue-500 text-white p-10 rounded-xl">
-                <div className="action-button-text">ˇ
+                <div className="action-button-text">
                     <h2 className="text-xl mb-3 font-semibold">Bespaar tijd, werk objectief en zorg voor blije leerlingen.</h2>
                     <p>Test het nu zelf en ervaar hoe eenvoudig het werkt!</p>
                 </div>
