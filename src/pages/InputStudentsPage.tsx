@@ -24,6 +24,10 @@ function Home() {
     localStorage.setItem("students", JSON.stringify(students))
   }, [students])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   // console.log(students)
   const addStudent = () => {
     let newStudents = [...students]
@@ -80,17 +84,17 @@ function Home() {
   }
 
   return (
-    <>
-      <div className="flex items-center">
-        <p className="m-4 text-xl">You currently have {students.length} {students.length == 1 ? "student" : "students"}</p>
-        <button className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer" onClick={fillRandom}>Fill In Randomly</button>
-        <button className="bg-red-200 p-2 rounded-sm hover:cursor-pointer hover:bg-red-300"
-          onClick={resetStudents}>Clear Students</button>
+    <div className="mt-5 min-h-screen">
+      <div className="flex items-center ml-5">
+        <p className="m-4 text-xl">Je hebt nu {students.length} {students.length == 1 ? "leerling" : "leerlingen"}</p>
+        <button className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer" onClick={fillRandom}>Willekeurig invullen</button>
+        <button className="bg-red-500 p-2 rounded-sm hover:cursor-pointer text-white hover:bg-red-600"
+          onClick={resetStudents}>Clear</button>
         {students.length >= 20
-          ? <Link className="bg-lime-200 hover:bg-lime-300 p-2 rounded-sm m-4 hover:cursor-pointer"
-            to='/sorting' >Sort Students</Link>
-          : <button disabled className="bg-lime-100 p-2 rounded-sm m-4 "
-           >Please enter atleast 20 students before sorting</button>}
+          ? <Link className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-sm m-4 hover:cursor-pointer"
+            to='/sorting' >Sorteer</Link>
+          : <button disabled className="bg-blue-400 text-white p-2 rounded-sm m-4 "
+          >Please enter atleast 20 students before sorting</button>}
 
       </div>
       {students.map((student, index) => {
@@ -107,34 +111,35 @@ function Home() {
       <button
         className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
         onClick={addStudent}>
-        Add student</button>
+        Voeg leerling toe</button>
 
-      <button className="bg-lime-200 p-2 rounded-sm hover:bg-lime-300 m-4 hover:cursor-pointer" onClick={addFriendsDialog}>Add student's friends</button>
+      <button className="bg-blue-500 p-2 rounded-sm hover:bg-blue-600 text-white m-4 hover:cursor-pointer" onClick={addFriendsDialog}>Voeg vriendjes toe</button>
       <dialog
         ref={addFriendsDialogRef}
         className="p-6 rounded-lg shadow-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <div>
-          <h1 className="font-bold">Assign Student Friendships</h1>
-          <p>Now that you have entered all student information, it’s time to let each student select their preferred groupmates. </p>
+          <h1 className="font-bold">Voeg vriendjes toe</h1>
+          <p>Nu je alle leerlinggegevens hebt ingevoerd, is het tijd om elke leerling zijn of haar voorkeursklasgenoten te laten kiezen.</p>
           <br />
           <ol className="list-decimal ml-6">
-            <li>Call a student over and ask them to choose the classmates they would like to be grouped with.</li>
-            <li>Once the student has made their selections, confirm and proceed to the next student.</li>
-            <li>Repeat until all students have provided their choices.</li>
+            <li>Roep een leerling bij je en vraag hem of haar om de klasgenoten te kiezen met wie ze graag ingedeeld willen worden.</li>
+            <li>Bevestig de keuzes van de leerling en ga verder naar de volgende leerling.</li>
+            <li>Herhaal dit proces totdat alle leerlingen hun voorkeuren hebben doorgegeven.</li>
           </ol>
+
           <div className="text-right">
             <button
-              className="bg-red-200 p-2 rounded-sm hover:bg-red-300 hover:cursor-pointer mr-2"
+              className="bg-red-500 text-white p-2 rounded-sm hover:bg-red-600 hover:cursor-pointer mr-2"
               onClick={addFriendsDialog}>
               Cancel</button>
             <Link
-              className="bg-emerald-200 p-2.5 rounded-sm hover:bg-emerald-300 hover:cursor-pointer"
+              className="bg-blue-500 text-white p-2.5 rounded-sm hover:bg-blue-600 hover:cursor-pointer"
               to={"/select-friends"}>
               begin</Link>
           </div>
         </div>
       </dialog>
-    </>
+    </div>
   )
 }
 

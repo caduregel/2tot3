@@ -1,10 +1,11 @@
 import App from "./App";
 import ErrorPage from "./pages/ErrorPage";
-import AboutPage from './pages/About.tsx';
-import Home from "./pages/Home.tsx";
+import Home from "./pages/InputStudentsPage.tsx";
 import HowToPage from "./pages/HowToPage.tsx";
 import SelectFriendsPage from "./pages/SelectFriendsPage.tsx";
 import SortStudentsPage from "./pages/SortStudentsPage.tsx";
+import HomePage from "./pages/HomePage.tsx";
+import MeerInfoPage from "./pages/MeerInfo.tsx";
 
 const routes = [
     {
@@ -13,11 +14,11 @@ const routes = [
         errorElement: <ErrorPage />,
         children: [
             {
-                path: '/about',
-                element: <AboutPage />
+                path: "/",
+                element: <HomePage />
             },
             {
-                path: '/',
+                path: '/input-students',
                 element: <Home />
             },
             {
@@ -32,6 +33,10 @@ const routes = [
                 path: '/sorting',
                 element: <SortStudentsPage />
             },
+            {
+                path: "/more-info",
+                element: <MeerInfoPage />
+            }
         ]
     },
 

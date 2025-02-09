@@ -43,18 +43,18 @@ const AddStudentCard: FC<Props> = ({ student, editStudent, finalStudent, deleteS
         editStudent(newStudents)
     }
     return (
-        <div className="flex p-3 items-center bg-gray-50 mb-3">
+        <div className="flex p-3 items-center bg-gray-50 mb-3 pl-5">
             <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="text" value={student.name} onChange={handleNameChange} />
 
-            <p >Cognitive level: </p>
+            <p className="mr-3">Cognitief: </p>
             <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="number" max="5" min="1" value={student.cognitive} onChange={handleCognitiveChange} />
 
-            <p className="mr-1">Social level: </p>
+            <p className="mr-3">Zorg: </p>
             <input className="bg-gray-200 mr-5 p-1 rounded-sm" type="number" max="5" min="1" value={student.social} onChange={handleSocialChange} />
 
             <select className="bg-gray-200 mr-5 p-1 rounded-sm hover:cursor-pointer" value={student.gender} onChange={handleGenderChange}>
-                <option value="boy">Boy</option>
-                <option value="girl">Girl</option>
+                <option value="boy">Jongen</option>
+                <option value="girl">Meisje</option>
             </select>
 
             {String(student.friends[0]) != "null" && String(student.friends[0]) !== "undefined"

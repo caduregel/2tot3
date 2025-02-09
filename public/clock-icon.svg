@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <!-- Buitenste cirkel van de klok -->
+    <circle cx="50" cy="50" r="45" fill="none" stroke="black" stroke-width="4"/>
+    
+    <!-- Wijzerplaat middenpunt -->
+    <circle cx="50" cy="50" r="3" fill="black"/>
+    
+    <!-- Grote wijzer (minuten) -->
+    <line x1="50" y1="50" x2="50" y2="15" stroke="black" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Kleine wijzer (uren) -->
+    <line x1="50" y1="50" x2="75" y2="50" stroke="black" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Uurmarkeringen -->
+    <line x1="50" y1="10" x2="50" y2="20" stroke="black" stroke-width="2"/> <!-- 12 uur -->
+    <line x1="90" y1="50" x2="80" y2="50" stroke="black" stroke-width="2"/> <!-- 3 uur -->
+    <line x1="50" y1="90" x2="50" y2="80" stroke="black" stroke-width="2"/> <!-- 6 uur -->
+    <line x1="10" y1="50" x2="20" y2="50" stroke="black" stroke-width="2"/> <!-- 9 uur -->
+</svg>

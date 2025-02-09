@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <!-- Centrale groep met rotatie -->
+    <g transform="translate(100,100) rotate(-8) translate(-100,-100)">
+        <!-- Buitenste cirkel -->
+        <circle cx="100" cy="100" r="80" 
+              fill="none" 
+              stroke="white" 
+              stroke-width="4"/>
+              
+        <!-- Binnenste cirkel -->
+        <circle cx="100" cy="100" r="75" 
+              fill="none" 
+              stroke="white" 
+              stroke-width="1"/>
+
+        <!-- Beta tekst -->
+        <text x="100" y="115" 
+              text-anchor="middle" 
+              font-family="Arial" 
+              font-size="45" 
+              font-weight="bold" 
+              fill="white">BETA</text>
+    </g>
+</svg>

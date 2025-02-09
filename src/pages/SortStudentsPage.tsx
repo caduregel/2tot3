@@ -8,13 +8,13 @@ const SortStudentsPage = () => {
 
     const sorted = sortStudents(students)
     return (
-        <div className="flex justify-around">
+        <div className="flex justify-around mt-5">
             <div>
-                <p className="text-xl">Groep Een</p>
+                <p className="text-2xl mb-1 font-medium text-center">Groep 1</p>
                 <div className="p-3 items-center bg-gray-200 mb-3 rounded-md">
                     <p>Groeps grote: {sorted.stats.groep1.groepsGrote}</p>
-                    <p>Gemiddeld Cognitief niveau: {Math.round(sorted.stats.groep1.gemiddeldCognitief * 10) / 10}</p>
-                    <p>Gemiddeld Gedrag niveau: {Math.round(sorted.stats.groep1.gemiddeldGedrag * 10) / 10}</p>
+                    <p>Gemiddeld cognitief niveau: {Math.round(sorted.stats.groep1.gemiddeldCognitief * 10) / 10}</p>
+                    <p>Gemiddeld zorg behoefte: {Math.round(sorted.stats.groep1.gemiddeldGedrag * 10) / 10}</p>
                     <p>Jongens: {sorted.stats.groep1.jongens}</p>
                     <p>meisjes: {sorted.stats.groep1.meisjes}</p>
                 </div>
@@ -26,12 +26,12 @@ const SortStudentsPage = () => {
                         group={sorted.groups[0]} />
                 })}
             </div>
-            <div>
-                <p className="text-xl">Groep Twee</p>
+            <div className="mb-10">
+                <p className="text-2xl mb-1 font-medium text-center ">Groep 2</p>
                 <div className="p-3 items-center bg-gray-200 mb-3 rounded-md">
                     <p>Groeps grote: {sorted.stats.groep2.groepsGrote}</p>
-                    <p>Gemiddeld Cognitief niveau: {Math.round(sorted.stats.groep2.gemiddeldCognitief * 10) / 10}</p>
-                    <p>Gemiddeld Gedrag niveau: {Math.round(sorted.stats.groep2.gemiddeldGedrag * 10) / 10}</p>
+                    <p>Gemiddeld cognitief niveau: {Math.round(sorted.stats.groep2.gemiddeldCognitief * 10) / 10}</p>
+                    <p>Gemiddeld zorg behoefte: {Math.round(sorted.stats.groep2.gemiddeldGedrag * 10) / 10}</p>
                     <p>Jongens: {sorted.stats.groep2.jongens}</p>
                     <p>meisjes: {sorted.stats.groep2.meisjes}</p>
                 </div>

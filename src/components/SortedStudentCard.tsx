@@ -41,8 +41,9 @@ const SortedStudentCard: FC<MainProps> = ({ students, index, group }) => {
 
     return (
         <div className="flex p-3 items-center bg-gray-200 mb-3 rounded-md">
-            <p className="mr-5 font-bold">{student.name}</p>
-            <p className="mr-3">Grouped Friends:</p>
+            <p className="mr-10 font-bold">{student.name}</p>
+
+            <p className="mr-3">Matched Vriendjes:</p>
             <ReturnGroupedFriends friendIDs={student.friends} group={group} students={students} />
         </div>
     )
