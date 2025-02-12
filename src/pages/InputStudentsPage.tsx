@@ -93,6 +93,16 @@ function Home() {
     }
   }
 
+  const isAddFriendsEnabled = () => {
+    if (students.length < 3) return false;
+    return students.every(student => student.name && student.cognitive && student.social && student.gender);
+  }
+
+  const isSortEnabled = () => {
+    if (students.length < 20) return false;
+    return students.every(student => student.friends.length === 3);
+  }
+
   const path: IPath = {
     links: [],
     current: "Proberen"
@@ -109,11 +119,14 @@ function Home() {
             <button className="bg-red-500 p-2 rounded-sm hover:cursor-pointer text-white hover:bg-red-600"
               onClick={resetStudents}>Clear</button>
 
-            {students.length >= 20
-              ? <Link className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-sm m-4 hover:cursor-pointer"
-                to='/sorting' >Sorteer</Link>
-              : <button disabled className="bg-blue-400 text-white p-2 rounded-sm m-4 "
-              >Vul tenminste 20 leerlingen in</button>}
+            <button
+              className={`p-2 rounded-sm m-4 ${isSortEnabled() ? 'bg-blue-500 text-white hover:bg-blue-600 hover:cursor-pointer' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+              onClick={isSortEnabled() ? () => window.location.href = '/sorting' : undefined}>
+              Sorteer
+            </button>
+            {!isSortEnabled() && (
+              <p className="text-red-500 ml-4">Voeg ten minste 20 leerlingen toe en vul alle vriendjes in om te sorteren.</p>
+            )}
           </div>
 
           <div>
@@ -143,7 +156,13 @@ function Home() {
             onClick={addStudent}>
             Voeg leerling toe</button>
 
-          <button className="bg-blue-500 p-2 rounded-sm hover:bg-blue-600 text-white m-4 hover:cursor-pointer" onClick={addFriendsDialog}>Voeg vriendjes toe</button>
+          <button
+            className={`p-2 rounded-sm m-4 ${isAddFriendsEnabled() ? 'bg-blue-500 text-white hover:bg-blue-600 hover:cursor-pointer' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+            onClick={isAddFriendsEnabled() ? addFriendsDialog : undefined}>
+            Voeg vriendjes toe</button>
+          {!isAddFriendsEnabled() && (
+            <p className="text-red-500 ml-4">Voeg ten minste 3 leerlingen toe en vul alle informatie in om vriendjes toe te voegen.</p>
+          )}
           <dialog
             ref={addFriendsDialogRef}
             className="p-6 rounded-lg shadow-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
