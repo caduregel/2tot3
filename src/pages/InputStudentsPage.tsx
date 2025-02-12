@@ -172,6 +172,7 @@ function Home() {
         </div>
       </div>
       <div className="lg:hidden">
+        <BreadCrumbs path={path} />
         <p className="flex justify-center mt-5 text-4xl">💻</p>
         <p className="text-center mt-10">Deze pagina kan beter bekeken worden op een groter scherm, kom een keer terug op een laptop om het algoritme uit te testen 👀!</p>
       </div>
