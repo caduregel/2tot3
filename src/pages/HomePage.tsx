@@ -28,7 +28,7 @@ const HomePage = () => {
 
             <div className="flex flex-col items-center pt-10 pb-10 md:pl-100 md:pr-100 mb-15 ">
                 <h1 className="text-xl md:text-3xl text-center font-semibold mb-10">Ontdek de kracht van Edusort</h1>
-                <ul className="flex flex-col list-none">
+                <ul className="flex flex-col md:flex-row list-none">
                     <li className="mr-8 flex flex-col items-center">
                         <img src="/clock-icon.svg" alt="" className="w-30 h-30 rounded-full mb-2" />
                         <p>Tijdbesparend</p>
