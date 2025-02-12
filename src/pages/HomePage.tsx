@@ -51,9 +51,9 @@ const HomePage = () => {
             </div>
 
             <div className="flex flex-col pr-5 pl-5 pt-20 pb-20 md:pl-80 md:pr-80 items-center bg-zinc-200 mb-15">
-                <h1 className="text-4xl italic ">“Technology will not replace great teachers, but technology in the hands of great teachers can be transformational.”
+                <h1 className="text-2xl italic md:text-4xl ">“The advance of technology is based on making it fit in so that you don’t really even notice it, so it’s part of everyday life.” 
                 </h1>
-                <p className="self-end text-xl">- George Couros</p>
+                <p className="self-end text-md md:text-xl">- Bill Gates</p>
             </div>
 
             <div className="flex flex-col md:flex-row justify-between items-center mt-10 mb-10 md:ml-60 md:mr-60 bg-blue-500 text-white p-10 rounded-xl">
