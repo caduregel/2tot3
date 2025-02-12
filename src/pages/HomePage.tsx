@@ -5,8 +5,8 @@ const HomePage = () => {
         <body>
             <div className="flex pt-10 pl-5 pr-5 md:pl-60 md:pr-60 pb-10 bg-slate-700 text-white">
                 <div className="flex-col">
-                    <h1 className="text-5xl font-bold mb-2">Slimme Groepsindeling:</h1>
-                    <h2 className="text-3xl font-bold mb-5">Efficiënt, Objectief en Kindvriendelijk</h2>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-2">Slimme Groepsindeling:</h1>
+                    <h2 className="text-xl md:text-3xl font-bold mb-5">Efficiënt, Objectief en Kindvriendelijk</h2>
                     <p className="mb-3">Maak eenvoudig evenwichtige groepen voor het nieuwe schooljaar. Ons slimme algoritme verdeelt leerlingen op basis van geslacht, cognitief niveau, gedrag en vriendschappen—zodat elke klas een sterke start heeft. </p>
                     <ul className="list-disc ml-5">
                         <li>
@@ -20,14 +20,14 @@ const HomePage = () => {
                         </li>
                     </ul>
                     <p className="mt-3 mb-8">Ervaar het zelf! Probeer het nu en ontdek hoe eenvoudig het werkt:</p>
-                    <Link to="/input-students" className="bg-blue-500 p-3 text-2xl font-semibold text-white rounded-xl mt-3 hover:bg-blue-600 hover:cursor-pointer">Probeer het!</Link>
+                    <Link to="/input-students" className="bg-blue-500 p-3 text-md md:text-2xl font-semibold text-white rounded-xl mt-3 hover:bg-blue-600 hover:cursor-pointer">Probeer het!</Link>
                 </div>
                 <img src="/beta-text-icon.svg" alt="" className="hidden md:inline w-100 h-100" />
             </div>
 
 
             <div className="flex flex-col items-center pt-10 pb-10 md:pl-100 md:pr-100 mb-15 ">
-                <h1 className="text-3xl font-semibold mb-10">Ontdek de kracht van Edusort</h1>
+                <h1 className="text-xl md:text-3xl text-center font-semibold mb-10">Ontdek de kracht van Edusort</h1>
                 <ul className="flex flex-col list-none">
                     <li className="mr-8 flex flex-col items-center">
                         <img src="/clock-icon.svg" alt="" className="w-30 h-30 rounded-full mb-2" />
