@@ -1,8 +1,17 @@
+import BreadCrumbs, { IPath } from "../components/BreadCrumbs"
+
 function HowToPage() {
+
+  const path: IPath = {
+    links: [
+    ],
+    current: "Handleiding"
+  }
 
   return (
     <>
-      <div className="pt-5 ml-80 mr-80 mt-10 min-h-screen " >
+    <BreadCrumbs path={path} />
+      <div className="pt-5 ml-80 mr-80 mt-10" >
         <h1 className="text-3xl mb-5 font-semibold">Handleiding: Leerlingindeling met het EduSort</h1>
         <div className="grid grid-cols-4 grid-rows-1">
           <div className="col-span-3">

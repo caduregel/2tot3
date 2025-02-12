@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom"
 function App() {
   return (
     <>
-      <div className="w-screen">
+      <div className="min-h-screen flex flex-col w-screen">
         <NavBar />
         <Outlet />
         <Footer />

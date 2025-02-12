@@ -30,11 +30,13 @@ const SearchStudentsDropdown: FC<Props> = ({ students, handleAddFriend, currentS
             alreadyChosen.push(friendId)
         }
     })
-  
+
     return (
         <div className="m-2">
             <select
-                className="bg-gray-200 mr-5 p-1 rounded-sm hover:cursor-pointer"
+                className={students[currentStudentIndex].friends[SelectorIndex]
+                    ? "bg-gray-200 mr-5 p-1 rounded-sm hover:cursor-pointer"
+                    : "bg-gray-200 mr-5 p-1 rounded-sm hover:cursor-pointer text-gray-500"}
                 value={
                     String(
                         students[currentStudentIndex].friends[SelectorIndex] ?? ''
@@ -43,7 +45,8 @@ const SearchStudentsDropdown: FC<Props> = ({ students, handleAddFriend, currentS
                         : ''
                 }
                 onChange={handleAddStudentFriends}>
-                <option disabled value=''> -- select an option -- </option>
+                <option disabled value='' >
+                    --Kies Vriendje {SelectorIndex}--</option>
                 {options.map((option, index) => {
                     // console.log(alreadyChosen)
                     if (option.value != currentStudentIndex && !alreadyChosen.includes(option.value)) {

@@ -1,8 +1,16 @@
 import { Link } from "react-router-dom"
+import BreadCrumbs, { IPath } from "../components/BreadCrumbs"
 
 const MeerInfoPage = () => {
+
+    const path:IPath = {
+        links: [],
+        current: "Meer Info"
+    }
+
     return (
-        <>
+        <div className="flex flex-col">
+            <BreadCrumbs path={path} />
             <div className="pt-5 ml-80 mr-80 mt-10">
                 <h1 className="text-3xl mb-5 font-semibold">Slimme Groepsindeling: Efficiënt, Objectief en Kindvriendelijk</h1>
 
@@ -55,7 +63,7 @@ const MeerInfoPage = () => {
                 </div>
                 <Link to="/input-students" className="bg-blue-500 p-2 text-white rounded-xl border-white border-2 mt-3 hover:bg-white hover:text-black hover:cursor-pointer">Try it!</Link>
             </div>
-        </>
+        </div>
     )
 }
 
