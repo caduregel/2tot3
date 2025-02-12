@@ -11,7 +11,7 @@ const MeerInfoPage = () => {
     return (
         <div className="flex flex-col">
             <BreadCrumbs path={path} />
-            <div className="pt-5 ml-80 mr-80 mt-10">
+            <div className="pt-5 px-4 md:px-20 lg:px-40 mt-10">
                 <h1 className="text-3xl mb-5 font-semibold">Slimme Groepsindeling: Efficiënt, Objectief en Kindvriendelijk</h1>
 
                 <h2 className="text-xl font-semibold mb-3">De Uitdaging van Klassenindeling</h2>
@@ -56,8 +56,8 @@ const MeerInfoPage = () => {
                 <p className="mb-10">Wil je ervaren hoe eenvoudig en effectief dit systeem werkt? Probeer het nu zelf en ontdek de voordelen!</p>
 
             </div>
-            <div className="flex justify-between items-center mt-10 mb-10 ml-60 mr-60 bg-blue-500 text-white p-10 rounded-xl">
-                <div className="action-button-text">
+            <div className="flex flex-col md:flex-row justify-between items-center mt-10 mb-10 px-4 md:px-20 lg:px-40 bg-blue-500 text-white p-10 rounded-xl">
+                <div className="action-button-text mb-4 md:mb-0">
                     <h2 className="text-xl mb-3 font-semibold">Bespaar tijd, werk objectief en zorg voor blije leerlingen.</h2>
                     <p>Test het nu zelf en ervaar hoe eenvoudig het werkt!</p>
                 </div>

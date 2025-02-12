@@ -11,10 +11,10 @@ function HowToPage() {
   return (
     <>
     <BreadCrumbs path={path} />
-      <div className="pt-5 ml-80 mr-80 mt-10" >
+      <div className="pt-5 px-4 md:px-80 mt-10">
         <h1 className="text-3xl mb-5 font-semibold">Handleiding: Leerlingindeling met het EduSort</h1>
-        <div className="grid grid-cols-4 grid-rows-1">
-          <div className="col-span-3">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="md:col-span-3">
             <h2 className="text-xl font-semibold mb-3">Stap 1: Leerlingen Invoeren</h2>
             <p>Voor elke leerling voert u de volgende gegevens in:</p>
             <ul className="list-decimal ml-6 mt-2 mb-2">
@@ -37,7 +37,7 @@ function HowToPage() {
             </ul>
             <p className="mb-5">Herhaal deze stappen tot alle leerlingen zijn ingevoerd.</p>
           </div>
-          <div className="col-span-1 bg-blue-500 p-5 rounded-xl text-white">
+          <div className="md:col-span-1 bg-blue-500 p-5 rounded-xl text-white">
             <h2 className="text-xl font-bold mb-3">Wilt u alleen de demo testen?</h2>
             <p className="font-semibold">
               Voor een snelle demo zonder handmatige invoer kunt u bij deze stap de optie <strong className="font-extrabold italic">"Willekeurig invullen"</strong> kiezen. Het systeem genereert automatisch 50 willekeurige leerlingen om het sorteren te testen.
