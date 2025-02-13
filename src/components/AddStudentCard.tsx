@@ -65,9 +65,9 @@ const AddStudentCard: FC<Props> = ({ student, editStudent, deleteStudent, studen
                 <option value="0" disabled>Cognitief Niveau</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
-                <option value="2">3</option>
-                <option value="2">4</option>
-                <option value="2">5</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
             </select>
 
             <select className={student.social == 0
@@ -77,9 +77,9 @@ const AddStudentCard: FC<Props> = ({ student, editStudent, deleteStudent, studen
                 <option value="0" disabled>Zorg Niveau</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
-                <option value="2">3</option>
-                <option value="2">4</option>
-                <option value="2">5</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
             </select>
 
             <select className="bg-gray-200 mr-5 p-1 rounded-sm hover:cursor-pointer" value={student.gender} onChange={handleGenderChange}>
