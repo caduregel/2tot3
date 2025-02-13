@@ -11,7 +11,7 @@ const MeerInfoPage = () => {
     return (
         <div className="flex flex-col">
             <BreadCrumbs path={path} />
-            <div className="pt-5 px-4 md:px-20 lg:px-40 mt-10">
+            <div className="pt-5 px-4 md:px-80 mt-10">
                 <h1 className="text-3xl mb-5 font-semibold">Slimme Groepsindeling: Efficiënt, Objectief en Kindvriendelijk</h1>
 
                 <h2 className="text-xl font-semibold mb-3">De Uitdaging van Klassenindeling</h2>

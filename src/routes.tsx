@@ -6,6 +6,7 @@ import SelectFriendsPage from "./pages/SelectFriendsPage.tsx";
 import SortStudentsPage from "./pages/SortStudentsPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import MeerInfoPage from "./pages/MeerInfo.tsx";
+import ContactPage from "./pages/ContactPage.tsx";
 
 const routes = [
     {
@@ -36,6 +37,10 @@ const routes = [
             {
                 path: "/more-info",
                 element: <MeerInfoPage />
+            },
+            {
+                path: "/contact",
+                element: <ContactPage />
             }
         ]
     },

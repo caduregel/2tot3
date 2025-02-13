@@ -1,6 +1,7 @@
 import sortStudents from "../algoritme/sorting/sortStudents"
 import SortedStudentCard from "../components/SortedStudentCard"
 import BreadCrumbs, { IPath } from "../components/BreadCrumbs"
+import { Link } from "react-router-dom"
 
 const SortStudentsPage = () => {
 
@@ -20,8 +21,13 @@ const SortStudentsPage = () => {
     return (
         <div className="flex-flex-col">
             <BreadCrumbs path={path} />
-            <div className="flex justify-around mt-5">
-                <div>
+                <div className="flex justify-center ">
+                    <Link to="/input-students" className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer">Terug</Link>
+                    <Link to="/contact" className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer">Contact Ons!</Link>
+
+                </div>
+            <div className="grid grid-cols-2 mb-10">
+                <div className="ml-10 mr-10">
                     <p className="text-2xl mb-1 font-medium text-center">Groep 1</p>
                     <div className="p-3 items-center bg-gray-200 mb-3 rounded-md">
                         <p>Groeps grote: {sorted.stats.groep1.groepsGrote}</p>
@@ -38,7 +44,7 @@ const SortStudentsPage = () => {
                             group={sorted.groups[0]} />
                     })}
                 </div>
-                <div className="mb-10">
+                <div className="ml-10 mr-10">
                     <p className="text-2xl mb-1 font-medium text-center ">Groep 2</p>
                     <div className="p-3 items-center bg-gray-200 mb-3 rounded-md">
                         <p>Groeps grote: {sorted.stats.groep2.groepsGrote}</p>
