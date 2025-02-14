@@ -40,7 +40,7 @@ const SortedStudentCard: FC<MainProps> = ({ students, index, group }) => {
     const student = students[index]
 
     return (
-        <div className="flex p-3 items-center bg-gray-200 mb-3 rounded-md">
+        <div className="flex p-3 items-center bg-gray-200 mb-3 rounded-md flex-wrap">
             <p className="mr-10 font-bold">{student.name}</p>
 
             <p className="mr-3">Matched Vriendjes:</p>

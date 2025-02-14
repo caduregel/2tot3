@@ -4,6 +4,7 @@ import BreadCrumbs, { IPath } from "../components/BreadCrumbs"
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { ISavedGroups } from "../interfaces/groupsInterface"
+import SavedGroups from "../components/savedGroups"
 
 const SortStudentsPage = () => {
     const [savedGroups, setSavedGroups] = useState<ISavedGroups[]>(localStorage.getItem('savedGroups')
@@ -45,8 +46,6 @@ const SortStudentsPage = () => {
         localStorage.setItem("savedGroups", JSON.stringify(savedGroups))
     }, [savedGroups])
 
-    console.log(savedGroups)
-
     return (
         <div className="flex-flex-col">
             <BreadCrumbs path={path} />
@@ -57,7 +56,7 @@ const SortStudentsPage = () => {
                 </div>
                 <button className="justify-self-end bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer" onClick={handleSave}>Groep Opslaan</button>
             </div>
-            <div className="grid grid-cols-2 mb-10">
+            <div className={savedGroups.length > 0 ? "grid grid-cols-3" : "grid grid-cols-2"}>
                 <div className="ml-10 mr-10">
                     <p className="text-2xl mb-1 font-medium text-center">Groep 1</p>
                     <div className="p-3 items-center bg-gray-200 mb-3 rounded-md">
@@ -93,6 +92,7 @@ const SortStudentsPage = () => {
 
                     })}
                 </div>
+                <SavedGroups savedGroups={savedGroups}/>
             </div>
         </div>
     )
