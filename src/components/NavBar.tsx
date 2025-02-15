@@ -11,6 +11,7 @@ function NavBar() {
                 <Link to="/input-students" className="m-1 md:m-3 p-1 font-medium">Proberen</Link>
                 <Link to="how-to" className="m-1 md:m-3 p-1 font-medium">Handleiding</Link>
                 <Link to="more-info" className="m-1 md:m-3 p-1 font-medium">Meer Info</Link>
+                <Link to="contact" className="m-1 md:m-3 p-1 font-medium">Contact</Link>
             </div>
         </header>
     )

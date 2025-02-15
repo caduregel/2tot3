@@ -69,7 +69,6 @@ function Home() {
     addFriendsDialogRef.current.hasAttribute("open")
       ? addFriendsDialogRef.current.close()
       : addFriendsDialogRef.current.showModal()
-
   }
 
   const fillRandom = () => {
@@ -116,7 +115,7 @@ function Home() {
         <div className="mt-5">
           <div className="flex items-center ml-5">
             <p className="m-4 text-xl">Je hebt nu {students.length} {students.length == 1 ? "leerling" : "leerlingen"}</p>
-            <FileUploader setStudents={setStudents}/>
+            <FileUploader setStudents={setStudents} />
             <button className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer" onClick={fillRandom}>Willekeurig invullen</button>
             <button className="bg-red-500 p-2 rounded-sm hover:cursor-pointer text-white hover:bg-red-600"
               onClick={resetStudents}>Clear</button>

@@ -63,8 +63,6 @@ const HomePage = () => {
                 </div>
                 <Link to="/input-students" className="bg-blue-500 p-2 text-white rounded-xl border-white border-2 mt-3 hover:bg-white hover:text-black hover:cursor-pointer">Probeer het!</Link>
             </div>
-
-
         </body>
     )
 }
