@@ -20,11 +20,16 @@ const SortStudentsPage = () => {
 
     const [saveGroupName, setSaveGroupName] = useState<string>("")
 
-    const saveGroupDialogRef = useRef<HTMLDialogElement>(null)
+
+    useEffect(() => {
+        localStorage.setItem("savedGroups", JSON.stringify(savedGroups))
+    }, [savedGroups])
 
     useEffect(() => {
         localStorage.setItem("sorted", JSON.stringify(currentSorted))
     }, [currentSorted])
+
+    const saveGroupDialogRef = useRef<HTMLDialogElement>(null)
 
     const path: IPath = {
         links: [
@@ -53,10 +58,6 @@ const SortStudentsPage = () => {
         newSavedGroups.push(groups)
         setSavedGroups(newSavedGroups)
     }
-
-    useEffect(() => {
-        localStorage.setItem("savedGroups", JSON.stringify(savedGroups))
-    }, [savedGroups])
 
     const saveGroupDialog = () => {
         if (!saveGroupDialogRef.current) {
