@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 
 const HomePage = () => {
+
     return (
         <body>
             <div className="flex pt-10 pl-5 pr-5 md:pl-60 md:pr-60 pb-10 bg-slate-700 text-white">
@@ -21,6 +22,10 @@ const HomePage = () => {
                     </ul>
                     <p className="mt-3 mb-8">Ervaar het zelf! Probeer het nu en ontdek hoe eenvoudig het werkt:</p>
                     <Link to="/input-students" className="bg-blue-500 p-3 text-md md:text-2xl font-semibold text-white rounded-xl mt-3 hover:bg-blue-600 hover:cursor-pointer">Probeer het!</Link>
+                        <p className="mt-5">
+                            Privacy en data zorgen? Wij slaan geen gevens op, alle ingevoerde data wordt uitsluitend lokaal op jou apparaat bewaard
+                        </p>
+
                 </div>
                 <img src="/beta-text-icon.svg" alt="" className="hidden md:inline w-100 h-100" />
             </div>
@@ -51,7 +56,7 @@ const HomePage = () => {
             </div>
 
             <div className="flex flex-col pr-5 pl-5 pt-20 pb-20 md:pl-80 md:pr-80 items-center bg-zinc-200 mb-15">
-                <h1 className="text-2xl italic md:text-4xl ">“The advance of technology is based on making it fit in so that you don’t really even notice it, so it’s part of everyday life.” 
+                <h1 className="text-2xl italic md:text-4xl ">“The advance of technology is based on making it fit in so that you don’t really even notice it, so it’s part of everyday life.”
                 </h1>
                 <p className="self-end text-md md:text-xl">- Bill Gates</p>
             </div>
@@ -63,7 +68,7 @@ const HomePage = () => {
                 </div>
                 <Link to="/input-students" className="bg-blue-500 p-2 text-white rounded-xl border-white border-2 mt-3 hover:bg-white hover:text-black hover:cursor-pointer">Probeer het!</Link>
             </div>
-        </body>
+        </body >
     )
 }
 

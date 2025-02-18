@@ -18,7 +18,7 @@ function HowToPage() {
             <h2 className="text-xl font-semibold mb-3">Stap 1: Leerlingen Invoeren</h2>
             <p>Voor elke leerling voert u de volgende gegevens in:</p>
             <ul className="list-decimal ml-6 mt-2 mb-2">
-              <li><strong>Naam</strong>: Vul de voor- en achternaam van de leerling in.</li>
+              <li><strong>Naam</strong>: Vul de naam van de leerling in.</li>
               <li><strong>Geslacht</strong>: Selecteer of de leerling een jongen of een meisje is.</li>
               <li><strong>Cognitief Niveau (1-5)</strong>: Beoordeel het cognitieve niveau van de leerling:
                 <ul className="list-decimal ml-6 mt-2 mb-2">
@@ -27,7 +27,7 @@ function HowToPage() {
                   <li><strong>4-5</strong>: Heeft een sterk cognitief vermogen en pakt leerstof snel op.</li>
                 </ul>
               </li>
-              <li><strong>Gedrag (1-5)</strong>: Beoordeel de mate van gedragsmatige ondersteuning:
+              <li><strong>Zorg (1-5)</strong>: Beoordeel de mate van gedragsmatige ondersteuning:
                 <ul className="list-decimal ml-6 mt-2 mb-2">
                   <li><strong>1</strong>: Geen zorgen over gedrag, werkt zelfstandig en sociaal vaardig.</li>
                   <li><strong>2-3</strong>: Af en toe begeleiding nodig bij gedrag en sociale interacties.</li>
