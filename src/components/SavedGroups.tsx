@@ -59,7 +59,7 @@ const SavedGroups: React.FC<ISavedGroupsProps> = ({ savedGroups, setSorted, dele
             + `Cognitief niveau:, ${Math.round(groups.stats.groep2.gemiddeldCognitief * 10) / 10} \n `
             + `Zorg behoefte:, ${Math.round(groups.stats.groep2.gemiddeldGedrag * 10) / 10} \n `
             + `Jongens:, ${groups.stats.groep2.jongens} \n `
-            + `Meisjes:, ${groups.stats.groep2.meisjes} `
+            + `Meisjes:, ${groups.stats.groep2.meisjes} \n`
 
         return [groupOneSummary, groupTwoSummary]
     }
@@ -67,8 +67,8 @@ const SavedGroups: React.FC<ISavedGroupsProps> = ({ savedGroups, setSorted, dele
     const handleDownload = (groups: ISavedGroups) => {
         const groupSummaries = writeSummary(groups)
 
-        const csvContentGroups = `Groep 1: Samenvatting: ${groupSummaries[0]} \n ${groups.groupOne.map(student => writeStudent(student, groups.groupOne)).join('\n')}
-        Groep 2: \n Samenvatting: ${groupSummaries[1]} ${groups.groupTwo.map(student => writeStudent(student, groups.groupTwo)).join('\n')} `;
+        const csvContentGroups = `Groep 1: \n Samenvatting: ${groupSummaries[0]} \n ${groups.groupOne.map(student => writeStudent(student, groups.groupOne)).join('\n')} \n
+        Groep 2: \n Samenvatting: ${groupSummaries[1]} \n ${groups.groupTwo.map(student => writeStudent(student, groups.groupTwo)).join('\n')} `;
 
         const csvContent = `data: text / csv; charset = utf - 8, ${csvContentGroups} `;
         const encodedUri = encodeURI(csvContent);
