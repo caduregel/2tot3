@@ -1,4 +1,6 @@
 import React from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import useReCAPTCHA from '../hooks/useReCAPTCHA';
 
 export interface IContactMessage {
     name: string;
@@ -12,6 +14,8 @@ const ContactPage: React.FC = () => {
         email: '',
         messageContent: ''
     });
+
+    const { capchaToken, recaptchaRef, handleRecaptcha } = useReCAPTCHA();
 
     const [status, setStatus] = React.useState<string | null>(null);
 
@@ -33,24 +37,36 @@ const ContactPage: React.FC = () => {
         setMessage(newMessage);
     }
 
-    const handleSendMessage = () => {
+    const handleSendMessage = async () => {
+        if (!message.name || !message.email || !message.messageContent) {
+            return setStatus("Vul alle velden in om het bericht te verzenden.");
+        }
+        setStatus("Verzenden...");
+
+        if (!capchaToken) {
+            return setStatus("Verifieer eerst dat u geen robot bent.");
+        }
+
         const url: string = import.meta.env.VITE_DEV_ENV === 'true' ? 'http://localhost:3000/send' : 'https://contact-receiver.vercel.app/send';
         fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(message)
-        })
-        .then(response => {
+            body: JSON.stringify(
+                {
+                    data: message,
+                    token: capchaToken
+                })
+        }).then(response => {
             if (response.ok) {
                 setStatus("Bericht succesvol verzonden!");
                 setMessage({ name: '', email: '', messageContent: '' });
             } else {
+                console.log(response)
                 setStatus("Er is een fout opgetreden bij het verzenden van het bericht.");
             }
-        })
-        .catch(() => {
+        }).catch(() => {
             setStatus("Er is een fout opgetreden bij het verzenden van het bericht.");
         });
     }
@@ -88,6 +104,13 @@ const ContactPage: React.FC = () => {
                     Verstuur
                 </button>
                 {status && <p className="mt-4 text-center">{status}</p>}
+                <div className='flex justify-center mt-5 mb-5'>
+                    <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={import.meta.env.VITE_CAPTCHA_SITE_KEY}
+                        onChange={handleRecaptcha}
+                    />
+                </div>
             </div>
         </div>
     );
