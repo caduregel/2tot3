@@ -13,6 +13,8 @@ const ContactPage: React.FC = () => {
         messageContent: ''
     });
 
+    const [status, setStatus] = React.useState<string | null>(null);
+
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const newMessage = { ...message };
         newMessage.name = e.target.value;
@@ -31,7 +33,6 @@ const ContactPage: React.FC = () => {
         setMessage(newMessage);
     }
 
-
     const handleSendMessage = () => {
         const url: string = import.meta.env.VITE_DEV_ENV === 'true' ? 'http://localhost:3000/send' : 'https://contact-receiver.vercel.app/send';
         fetch(url, {
@@ -40,9 +41,18 @@ const ContactPage: React.FC = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(message)
-        }).then(response => {
-            console.log(response)
         })
+        .then(response => {
+            if (response.ok) {
+                setStatus("Bericht succesvol verzonden!");
+                setMessage({ name: '', email: '', messageContent: '' });
+            } else {
+                setStatus("Er is een fout opgetreden bij het verzenden van het bericht.");
+            }
+        })
+        .catch(() => {
+            setStatus("Er is een fout opgetreden bij het verzenden van het bericht.");
+        });
     }
 
     return (
@@ -77,6 +87,7 @@ const ContactPage: React.FC = () => {
                     onClick={handleSendMessage}>
                     Verstuur
                 </button>
+                {status && <p className="mt-4 text-center">{status}</p>}
             </div>
         </div>
     );
