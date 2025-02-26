@@ -6,13 +6,15 @@ export interface IContactMessage {
     name: string;
     email: string;
     messageContent: string;
+    honeypot: string; // Add honeypot field
 }
 
 const ContactPage: React.FC = () => {
     const [message, setMessage] = React.useState<IContactMessage>({
         name: '',
         email: '',
-        messageContent: ''
+        messageContent: '',
+        honeypot: '' // Initialize honeypot field
     });
 
     const { capchaToken, recaptchaRef, handleRecaptcha } = useReCAPTCHA();
@@ -37,10 +39,30 @@ const ContactPage: React.FC = () => {
         setMessage(newMessage);
     }
 
+    const handleHoneypotChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newMessage = { ...message };
+        newMessage.honeypot = e.target.value;
+        setMessage(newMessage);
+    }
+
+    const isValidEmail = (email: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
     const handleSendMessage = async () => {
+        if (message.honeypot) {
+            return; // If honeypot field is filled, do nothing
+        }
+
         if (!message.name || !message.email || !message.messageContent) {
             return setStatus("Vul alle velden in om het bericht te verzenden.");
         }
+
+        if (!isValidEmail(message.email)) {
+            return setStatus("Voer een geldig e-mailadres in.");
+        }
+
         setStatus("Verzenden...");
 
         if (!capchaToken) {
@@ -61,7 +83,7 @@ const ContactPage: React.FC = () => {
         }).then(response => {
             if (response.ok) {
                 setStatus("Bericht succesvol verzonden!");
-                setMessage({ name: '', email: '', messageContent: '' });
+                setMessage({ name: '', email: '', messageContent: '', honeypot: '' });
             } else {
                 console.log(response)
                 setStatus("Er is een fout opgetreden bij het verzenden van het bericht.");
@@ -98,6 +120,15 @@ const ContactPage: React.FC = () => {
                     placeholder="Bericht inhoud..."
                     value={message.messageContent}
                     onChange={handleMessageContentChange} />
+                {/* Honeypot field */}
+                <input
+                    type="text"
+                    value={message.honeypot}
+                    onChange={handleHoneypotChange}
+                    style={{ display: 'none' }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                />
                 <button
                     className="bg-blue-500 text-white p-2 rounded-sm w-full hover:bg-blue-600 hover:cursor-pointer"
                     onClick={handleSendMessage}>
