@@ -97,7 +97,7 @@ const ContactPage: React.FC = () => {
         <div className="mt-5 ml-5 flex flex-col items-center">
             <h1 className="text-3xl font-bold mb-4">Contact ons!</h1>
             <p className="mb-4 text-center">
-                Vul het onderstaande formulier in om contact met ons op te nemen. We zullen zo snel mogelijk reageren.
+                Vul het onderstaande formulier in om contact met mij op te nemen. Ik zullen zo snel mogelijk reageren.
             </p>
             <div className="w-full max-w-md">
                 <label className="block mb-2 text-sm font-medium text-gray-700">Naam</label>
