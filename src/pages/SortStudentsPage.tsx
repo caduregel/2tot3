@@ -4,7 +4,7 @@ import sortStudents from "../algoritme/sorting/sortStudents"
 import { Link } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { IGroups, ISavedGroups } from "../interfaces/groupsInterface"
-import SavedGroups from "../components/SavedGroups"
+import SavedGroups from "../components/SavedGroups/SavedGroups"
 
 const SortStudentsPage = () => {
     const [savedGroups, setSavedGroups] = useState<ISavedGroups[]>(localStorage.getItem('savedGroups')
