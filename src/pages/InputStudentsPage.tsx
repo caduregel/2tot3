@@ -1,38 +1,49 @@
-import { useEffect, useRef, useState } from "react"
-import { IStudent } from "../interfaces/studentInterface"
-import AddStudentCard from "../components/AddStudentCard"
-import { Link } from "react-router-dom"
-import { generateRandomStudents } from "../helpers/generateRandomStudents"
-import BreadCrumbs, { IPath } from "../components/BreadCrumbs"
-import FileUploader from "../components/FileUploader"
-
+import { useEffect, useRef, useState } from "react";
+import { IStudent } from "../interfaces/studentInterface";
+import AddStudentCard from "../components/AddStudentCard";
+import { Link } from "react-router-dom";
+import { generateRandomStudents } from "../helpers/generateRandomStudents";
+import BreadCrumbs, { IPath } from "../components/BreadCrumbs";
+import FileUploader from "../components/FileUploader";
 
 function Home() {
   const [students, setStudents] = useState<IStudent[]>(
     localStorage.getItem("students")
       ? JSON.parse(localStorage.getItem("students") || "{}")
-      : [{
-        index: 0,
-        name: "",
-        cognitive: 0,
-        social: 0,
-        gender: "boy",
-        friends: [],
-      }])
+      : [
+        {
+          index: 0,
+          name: "",
+          cognitive: 0,
+          social: 0,
+          gender: "boy",
+          friends: [],
+        },
+      ],
+  );
 
-  const addFriendsDialogRef = useRef<HTMLDialogElement>(null)
+  const [split, setSplit] = useState<number>(
+    localStorage.getItem("split")
+      ? Number(JSON.parse(localStorage.getItem("split") || "{}"))
+      : 2,
+  ); // Ammount of groups to split students into
+  const addFriendsDialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    localStorage.setItem("students", JSON.stringify(students))
-  }, [students])
+    localStorage.setItem("students", JSON.stringify(students));
+  }, [students]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    localStorage.setItem("split", JSON.stringify(split));
+  }, [split]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // console.log(students)
   const addStudent = () => {
-    let newStudents = [...students]
+    const newStudents = [...students];
 
     newStudents.push({
       index: newStudents.length,
@@ -41,72 +52,84 @@ function Home() {
       social: 0,
       gender: "boy",
       friends: [],
-    })
+    });
 
-    setStudents(newStudents)
-  }
+    setStudents(newStudents);
+  };
 
   const editStudent = (student: IStudent) => {
-    let newStudents = [...students]
-    newStudents[student.index] = student
+    const newStudents = [...students];
+    newStudents[student.index] = student;
 
-    setStudents(newStudents)
-  }
+    setStudents(newStudents);
+  };
 
   const deleteStudent = (index: number) => {
-    let newStudents = [...students]
-    newStudents.splice(index, 1)
+    const newStudents = [...students];
+    newStudents.splice(index, 1);
     newStudents.forEach((student, index) => {
-      student.index = index
-    })
-    setStudents(newStudents)
-  }
+      student.index = index;
+    });
+    setStudents(newStudents);
+  };
 
   const addFriendsDialog = () => {
     if (!addFriendsDialogRef.current) {
-      return
+      return;
     }
     addFriendsDialogRef.current.hasAttribute("open")
       ? addFriendsDialogRef.current.close()
-      : addFriendsDialogRef.current.showModal()
-  }
+      : addFriendsDialogRef.current.showModal();
+  };
 
   const fillRandom = () => {
-    const randStudents = generateRandomStudents(50)
-    setStudents(randStudents)
-  }
+    const randStudents = generateRandomStudents(50);
+    setStudents(randStudents);
+  };
 
   const resetStudents = () => {
-    setStudents([{
-      index: 0,
-      name: "",
-      cognitive: 0,
-      social: 0,
-      gender: "jongen",
-      friends: [],
-    }])
-  }
+    setStudents([
+      {
+        index: 0,
+        name: "",
+        cognitive: 0,
+        social: 0,
+        gender: "jongen",
+        friends: [],
+      },
+    ]);
+  };
 
   const addFriend = (index: number) => {
     if (index == students.length - 1) {
-      addStudent()
+      addStudent();
     }
-  }
+  };
 
   const isAddFriendsEnabled = () => {
     if (students.length < 3) return false;
-    return students.every(student => student.name && student.cognitive && student.social && student.gender);
-  }
+    return students.every(
+      (student) =>
+        student.name && student.cognitive && student.social && student.gender,
+    );
+  };
 
   const isSortEnabled = () => {
     if (students.length < 20) return false;
-    return students.every(student => student.friends.length === 3);
-  }
+    return students.every((student) => student.friends.length === 3);
+  };
 
   const path: IPath = {
     links: [],
-    current: "Proberen"
-  }
+    current: "Proberen",
+  };
+
+  const handleSplitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newSplit = Number(event.target.value);
+    if (newSplit > 1 && newSplit <= 6) {
+      setSplit(newSplit);
+    }
+  };
 
   return (
     <div>
@@ -114,22 +137,55 @@ function Home() {
         <BreadCrumbs path={path} />
         <div className="mt-5">
           <div className="flex items-center ml-5">
-            <p className="m-4 text-xl">Je hebt nu {students.length} {students.length == 1 ? "leerling" : "leerlingen"}</p>
+            <p className="m-4 text-xl">
+              Je hebt nu {students.length}{" "}
+              {students.length == 1 ? "leerling" : "leerlingen"}
+            </p>
             <FileUploader setStudents={setStudents} />
-            <button className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer" onClick={fillRandom}>Willekeurig invullen</button>
-            <button className="bg-red-500 p-2 rounded-sm hover:cursor-pointer text-white hover:bg-red-600"
-              onClick={resetStudents}>Clear</button>
+            <button
+              className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
+              onClick={fillRandom}
+            >
+              Willekeurig invullen
+            </button>
+            <button
+              className="bg-red-500 p-2 rounded-sm hover:cursor-pointer text-white hover:bg-red-600"
+              onClick={resetStudents}
+            >
+              Clear
+            </button>
 
             <button
-              className={`p-2 rounded-sm m-4 ${isSortEnabled() ? 'bg-blue-500 text-white hover:bg-blue-600 hover:cursor-pointer' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
-              onClick={isSortEnabled() ? () => window.location.href = '/sorting' : undefined}>
+              className={`p-2 rounded-sm m-4 ${isSortEnabled() ? "bg-blue-500 text-white hover:bg-blue-600 hover:cursor-pointer" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
+              onClick={
+                isSortEnabled()
+                  ? () => (window.location.href = "/sorting")
+                  : undefined
+              }
+            >
               Sorteer
             </button>
             {!isSortEnabled() && (
-              <p className="text-red-500 ml-4">Voeg ten minste 20 leerlingen toe en vul alle vriendjes in om te sorteren.</p>
+              <p className="text-red-500 ml-4">
+                Voeg ten minste 20 leerlingen toe en vul alle vriendjes in om te
+                sorteren.
+              </p>
             )}
           </div>
-
+          <div className="m-5 flex flex-col">
+            <label className="m-2 mt-0">
+              In hoeveel groepen wil je de leerlingen verdelen?
+            </label>
+            <input
+              className="bg-gray-200 p-1 m-2 rounded-sm max-w-10"
+              placeholder="Aantal groepen..."
+              type="number"
+              value={split}
+              onChange={handleSplitChange}
+              max={5}
+              min={2}
+            />
+          </div>
           <div>
             <div className="grid grid-cols-8 gap-5 p-3 justify-around items-center bg-gray-50 mb-3 pl-5">
               <p className="text-center">Leerling naam</p>
@@ -141,51 +197,77 @@ function Home() {
               <p className="text-center">Vriendje 3</p>
             </div>
             {students.map((student, index) => {
-              return <AddStudentCard
-                key={index}
-                student={student}
-                editStudent={editStudent}
-                deleteStudent={deleteStudent}
-                students={students}
-                addFriend={addFriend}
-              />
+              return (
+                <AddStudentCard
+                  key={index}
+                  student={student}
+                  editStudent={editStudent}
+                  deleteStudent={deleteStudent}
+                  students={students}
+                  addFriend={addFriend}
+                />
+              );
             })}
           </div>
 
           <button
             className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
-            onClick={addStudent}>
-            Voeg leerling toe</button>
+            onClick={addStudent}
+          >
+            Voeg leerling toe
+          </button>
 
           <button
-            className={`p-2 rounded-sm m-4 ${isAddFriendsEnabled() ? 'bg-blue-500 text-white hover:bg-blue-600 hover:cursor-pointer' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
-            onClick={isAddFriendsEnabled() ? addFriendsDialog : undefined}>
-            Voeg vriendjes toe</button>
+            className={`p-2 rounded-sm m-4 ${isAddFriendsEnabled() ? "bg-blue-500 text-white hover:bg-blue-600 hover:cursor-pointer" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
+            onClick={isAddFriendsEnabled() ? addFriendsDialog : undefined}
+          >
+            Voeg vriendjes toe
+          </button>
           {!isAddFriendsEnabled() && (
-            <p className="text-red-500 ml-4">Voeg ten minste 3 leerlingen toe en vul alle informatie in om vriendjes toe te voegen.</p>
+            <p className="text-red-500 ml-4">
+              Voeg ten minste 3 leerlingen toe en vul alle informatie in om
+              vriendjes toe te voegen.
+            </p>
           )}
           <dialog
             ref={addFriendsDialogRef}
-            className="p-6 rounded-lg shadow-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            className="p-6 rounded-lg shadow-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          >
             <div>
               <h1 className="font-bold">Voeg vriendjes toe</h1>
-              <p>Nu je alle leerlinggegevens hebt ingevoerd, is het tijd om elke leerling zijn of haar voorkeursklasgenoten te laten kiezen.</p>
+              <p>
+                Nu je alle leerlinggegevens hebt ingevoerd, is het tijd om elke
+                leerling zijn of haar voorkeursklasgenoten te laten kiezen.
+              </p>
               <br />
               <ol className="list-decimal ml-6">
-                <li>Roep een leerling bij je en vraag hem of haar om de klasgenoten te kiezen met wie ze graag ingedeeld willen worden.</li>
-                <li>Bevestig de keuzes van de leerling en ga verder naar de volgende leerling.</li>
-                <li>Herhaal dit proces totdat alle leerlingen hun voorkeuren hebben doorgegeven.</li>
+                <li>
+                  Roep een leerling bij je en vraag hem of haar om de klasgenten
+                  te kiezen met wie ze graag ingedeeld willen worden.
+                </li>
+                <li>
+                  Bevestig de keuzes van de leerling en ga verder naar de
+                  volgende leerling.
+                </li>
+                <li>
+                  Herhaal dit proces totdat alle leerlingen hun voorkeuren
+                  hebben doorgegeven.
+                </li>
               </ol>
 
               <div className="text-right">
                 <button
                   className="bg-red-500 text-white p-2 rounded-sm hover:bg-red-600 hover:cursor-pointer mr-2"
-                  onClick={addFriendsDialog}>
-                  Cancel</button>
+                  onClick={addFriendsDialog}
+                >
+                  Cancel
+                </button>
                 <Link
                   className="bg-blue-500 text-white p-2.5 rounded-sm hover:bg-blue-600 hover:cursor-pointer"
-                  to={"/select-friends"}>
-                  begin</Link>
+                  to={"/select-friends"}
+                >
+                  begin
+                </Link>
               </div>
             </div>
           </dialog>
@@ -194,10 +276,13 @@ function Home() {
       <div className="lg:hidden">
         <BreadCrumbs path={path} />
         <p className="flex justify-center mt-5 text-4xl">💻</p>
-        <p className="text-center mt-10">Deze pagina kan beter bekeken worden op een groter scherm, kom een keer terug op een laptop om het algoritme uit te testen 👀!</p>
+        <p className="text-center mt-10">
+          Deze pagina kan beter bekeken worden op een groter scherm, kom een
+          keer terug op een laptop om het algoritme uit te testen 👀!
+        </p>
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

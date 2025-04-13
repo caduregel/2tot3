@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const HomePage = () => {
 
     return (
-        <body>
+        <>
             <div className="flex pt-10 pl-5 pr-5 md:pl-60 md:pr-60 pb-10 bg-slate-700 text-white">
                 <div className="flex-col">
                     <h1 className="text-4xl md:text-5xl font-bold mb-2">Slimme Groepsindeling:</h1>
@@ -68,7 +68,7 @@ const HomePage = () => {
                 </div>
                 <Link to="/input-students" className="bg-blue-500 p-2 text-white rounded-xl border-white border-2 mt-3 hover:bg-white hover:text-black hover:cursor-pointer">Probeer het!</Link>
             </div>
-        </body >
+        </ >
     )
 }
 
