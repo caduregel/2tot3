@@ -1,10 +1,10 @@
-import SortedStudentCard from "../components/SortedStudentCard";
 import BreadCrumbs, { IPath } from "../components/BreadCrumbs";
 import sortStudents from "../algoritme/sorting/sortStudents";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { IGroups, ISavedGroups } from "../interfaces/groupsInterface";
 import SavedGroups from "../components/SavedGroups/SavedGroups";
+import Group from "../components/Group";
 
 const SortStudentsPage = () => {
   const [savedGroups, setSavedGroups] = useState<ISavedGroups[]>(
@@ -32,6 +32,11 @@ const SortStudentsPage = () => {
     localStorage.setItem("sorted", JSON.stringify(currentSorted));
   }, [currentSorted]);
 
+  useEffect(() => {
+    () => { window.scrollTo({ top: 0, behavior: "smooth" }) }
+
+  }, [currentSorted]);
+
   const saveGroupDialogRef = useRef<HTMLDialogElement>(null);
 
   const path: IPath = {
@@ -47,16 +52,9 @@ const SortStudentsPage = () => {
   const handleSave = () => {
     const groups: ISavedGroups = {
       name: saveGroupName,
-      groupOne: [],
-      groupTwo: [],
+      groups: currentSorted.groups,
       stats: currentSorted.stats,
     };
-    currentSorted.groups[0].forEach((studentIndex) => {
-      groups.groupOne.push(students[studentIndex]);
-    });
-    currentSorted.groups[1].forEach((studentIndex) => {
-      groups.groupTwo.push(students[studentIndex]);
-    });
     const newSavedGroups = [...savedGroups];
     newSavedGroups.push(groups);
     setSavedGroups(newSavedGroups);
@@ -94,6 +92,7 @@ const SortStudentsPage = () => {
     <div className="flex-flex-col mb-10 ">
       <BreadCrumbs path={path} />
       <div className="grid grid-cols-3">
+        <button>Sorteer Settings</button>
         <div className="justify-self-center self-center col-start-2">
           <Link
             to="/input-students"
@@ -123,65 +122,19 @@ const SortStudentsPage = () => {
           </button>
         </div>
       </div>
+      <div className="flex">
+        {
+          currentSorted.groups.map((group, index) => {
+            return <Group index={index} group={group} stats={currentSorted.stats[index]} students={students} key={index} />
+          })
+        }
+      </div>
       <div
         className={
           savedGroups.length > 0 ? "grid grid-cols-3" : "grid grid-cols-2"
         }
       >
-        <div className="ml-5">
-          <p className="text-2xl mb-1 font-medium text-center">Groep 1</p>
-          <div className="p-3 items-center bg-gray-200 mb-3 rounded-md">
-            <p>Groeps grote: {currentSorted.stats.groep1.groepsGrote}</p>
-            <p>
-              Gemiddeld cognitief niveau:{" "}
-              {Math.round(currentSorted.stats.groep1.gemiddeldCognitief * 10) /
-                10}
-            </p>
-            <p>
-              Gemiddeld zorg behoefte:{" "}
-              {Math.round(currentSorted.stats.groep1.gemiddeldGedrag * 10) / 10}
-            </p>
-            <p>Jongens: {currentSorted.stats.groep1.jongens}</p>
-            <p>meisjes: {currentSorted.stats.groep1.meisjes}</p>
-          </div>
-          {currentSorted.groups[0].map((studentIndex: number) => {
-            return (
-              <SortedStudentCard
-                students={students}
-                index={studentIndex}
-                key={studentIndex}
-                group={currentSorted.groups[0]}
-              />
-            );
-          })}
-        </div>
-        <div className="ml-10 ">
-          <p className="text-2xl mb-1 font-medium text-center ">Groep 2</p>
-          <div className="p-3 items-center bg-gray-200 mb-3 rounded-md">
-            <p>Groeps grote: {currentSorted.stats.groep2.groepsGrote}</p>
-            <p>
-              Gemiddeld cognitief niveau:{" "}
-              {Math.round(currentSorted.stats.groep2.gemiddeldCognitief * 10) /
-                10}
-            </p>
-            <p>
-              Gemiddeld zorg behoefte:{" "}
-              {Math.round(currentSorted.stats.groep2.gemiddeldGedrag * 10) / 10}
-            </p>
-            <p>Jongens: {currentSorted.stats.groep2.jongens}</p>
-            <p>meisjes: {currentSorted.stats.groep2.meisjes}</p>
-          </div>
-          {currentSorted.groups[1].map((studentIndex: number) => {
-            return (
-              <SortedStudentCard
-                students={students}
-                index={studentIndex}
-                key={studentIndex}
-                group={currentSorted.groups[1]}
-              />
-            );
-          })}
-        </div>
+
         {savedGroups.length > 0 ? (
           <SavedGroups
             savedGroups={savedGroups}
