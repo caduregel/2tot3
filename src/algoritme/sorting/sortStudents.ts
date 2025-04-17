@@ -93,7 +93,7 @@ const sortStudents = (allStudents: IStudent[], split: number): IGroups => {
   let acceptableSizes = false;
 
   let iterations = 0;
-  const maxIterations = 10000;
+  const maxIterations = 50000;
 
   let groups = stepOne(allStudents, split);
 

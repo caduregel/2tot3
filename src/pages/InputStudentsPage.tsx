@@ -22,20 +22,11 @@ function Home() {
       ],
   );
 
-  const [split, setSplit] = useState<number>(
-    localStorage.getItem("split")
-      ? Number(JSON.parse(localStorage.getItem("split") || "{}"))
-      : 2,
-  ); // Ammount of groups to split students into
   const addFriendsDialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     localStorage.setItem("students", JSON.stringify(students));
   }, [students]);
-
-  useEffect(() => {
-    localStorage.setItem("split", JSON.stringify(split));
-  }, [split]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -124,12 +115,7 @@ function Home() {
     current: "Proberen",
   };
 
-  const handleSplitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSplit = Number(event.target.value);
-    if (newSplit > 1 && newSplit <= 6) {
-      setSplit(newSplit);
-    }
-  };
+
 
   return (
     <div>
@@ -176,15 +162,7 @@ function Home() {
             <label className="m-2 mt-0">
               In hoeveel groepen wil je de leerlingen verdelen?
             </label>
-            <input
-              className="bg-gray-200 p-1 m-2 rounded-sm max-w-10"
-              placeholder="Aantal groepen..."
-              type="number"
-              value={split}
-              onChange={handleSplitChange}
-              max={5}
-              min={2}
-            />
+           
           </div>
           <div>
             <div className="grid grid-cols-8 gap-5 p-3 justify-around items-center bg-gray-50 mb-3 pl-5">

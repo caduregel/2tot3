@@ -13,8 +13,9 @@ const SortStudentsPage = () => {
       : [],
   );
 
+  const [split, setSplit] = useState<number>(2);
+
   const students = JSON.parse(localStorage.getItem("students") || "{}");
-  const split = JSON.parse(localStorage.getItem("split") || "{2}");
 
   const [currentSorted, setCurrentSorted] = useState<IGroups>(
     localStorage.getItem("sorted")
@@ -88,12 +89,18 @@ const SortStudentsPage = () => {
     setCurrentSorted(newSorted);
   };
 
+  const handleSplitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newSplit = Number(event.target.value);
+    if (newSplit > 1 && newSplit <= 6) {
+      setSplit(newSplit);
+    }
+  };
+
   return (
     <div className="flex-flex-col mb-10 ">
       <BreadCrumbs path={path} />
-      <div className="grid grid-cols-3">
-        <button>Sorteer Settings</button>
-        <div className="justify-self-center self-center col-start-2">
+      <div className="flex justify-between m-4">
+      <div className="justify-self-center self-center col-start-2">
           <Link
             to="/input-students"
             className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
@@ -107,6 +114,19 @@ const SortStudentsPage = () => {
             Contact Ons!
           </Link>
         </div>
+        <div>
+          <button>Aantal groepen</button>
+          <input
+            className="bg-gray-200 p-1 m-2 rounded-sm max-w-10"
+            placeholder="Aantal groepen..."
+            type="number"
+            value={split}
+            onChange={handleSplitChange}
+            max={5}
+            min={2}
+          />
+        </div>
+        
         <div className="justify-self-end self-center col-start-3">
           <button
             className="justify-self-end bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
@@ -122,6 +142,13 @@ const SortStudentsPage = () => {
           </button>
         </div>
       </div>
+      {savedGroups.length > 0 ? (
+          <SavedGroups
+            savedGroups={savedGroups}
+            setSorted={setSorted}
+            deleteGroup={deleteSavedGroup}
+          />
+        ) : null}
       <div className="flex">
         {
           currentSorted.groups.map((group, index) => {
@@ -134,15 +161,6 @@ const SortStudentsPage = () => {
           savedGroups.length > 0 ? "grid grid-cols-3" : "grid grid-cols-2"
         }
       >
-
-        {savedGroups.length > 0 ? (
-          <SavedGroups
-            savedGroups={savedGroups}
-            setSorted={setSorted}
-            deleteGroup={deleteSavedGroup}
-          />
-        ) : null}
-
         <dialog
           ref={saveGroupDialogRef}
           className="p-6 rounded-lg shadow-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
