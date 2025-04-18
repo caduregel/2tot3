@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { IGroups, ISavedGroups } from "../interfaces/groupsInterface";
 import SavedGroups from "../components/SavedGroups/SavedGroups";
 import Group from "../components/Group";
-import { DndContext } from "@dnd-kit/core";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import testFunction from "../algoritme/helpers/test";
 
 const SortStudentsPage = () => {
@@ -28,7 +28,7 @@ const SortStudentsPage = () => {
   const [saveGroupName, setSaveGroupName] = useState<string>("");
 
   const [isDropped, setIsDropped] = useState(false);
-
+console.log(isDropped)
   useEffect(() => {
     localStorage.setItem("savedGroups", JSON.stringify(savedGroups));
   }, [savedGroups]);
@@ -100,9 +100,11 @@ const SortStudentsPage = () => {
     }
   };
 
-  const handleDragEnd = (event) => {
-    const studentId = event.active.id.split("-")[1];
-    const newGroupId = parseInt(event.over.id.split("-")[1], 10);
+  const handleDragEnd = (event: DragEndEvent) => {
+    const studentId = typeof event.active.id === "string" ? event.active.id.split("-")[1] : "";
+    const newGroupId = event.over && typeof event.over.id === "string" 
+      ? parseInt(event.over.id.split("-")[1], 10) 
+      : -1;
 
     // Find the old group where the student currently is
     let oldGroupId = -1;
