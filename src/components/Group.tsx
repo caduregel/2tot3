@@ -12,7 +12,7 @@ interface GroupProps {
 }
 
 const Group: FC<GroupProps> = ({ group, stats, students, index }) => {
-    const { isOver, setNodeRef } = useDroppable({
+    const { setNodeRef } = useDroppable({
         id: `droppable-${index}`,
         data: {
             group: group,
