@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { IGroups, ISavedGroups } from "../interfaces/groupsInterface";
 import SavedGroups from "../components/SavedGroups/SavedGroups";
 import Group from "../components/Group";
+import { DndContext } from "@dnd-kit/core";
+import testFunction from "../algoritme/helpers/test";
 
 const SortStudentsPage = () => {
   const [savedGroups, setSavedGroups] = useState<ISavedGroups[]>(
@@ -24,6 +26,8 @@ const SortStudentsPage = () => {
   );
 
   const [saveGroupName, setSaveGroupName] = useState<string>("");
+
+  const [isDropped, setIsDropped] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("savedGroups", JSON.stringify(savedGroups));
@@ -96,11 +100,39 @@ const SortStudentsPage = () => {
     }
   };
 
+  const handleDragEnd = (event) => {
+    const studentId = event.active.id.split("-")[1];
+    const newGroupId = parseInt(event.over.id.split("-")[1], 10);
+
+    // Find the old group where the student currently is
+    let oldGroupId = -1;
+    currentSorted.groups.forEach((group, index) => {
+      if (group.includes(parseInt(studentId))) {
+        oldGroupId = index;
+      }
+    });
+    if (newGroupId === oldGroupId) {
+      return;
+    }
+    // Remove the student from the old group
+    const newGroups = [...currentSorted.groups];
+    newGroups[oldGroupId] = newGroups[oldGroupId].filter((student) => student !== parseInt(studentId));
+    newGroups[newGroupId].unshift(parseInt(studentId));
+
+    const newStats = testFunction(students, newGroups);
+
+    setCurrentSorted({
+      groups: newGroups,
+      iterations: currentSorted.iterations,
+      stats: newStats,
+    });
+    setIsDropped(true);
+  };
   return (
     <div className="flex-flex-col mb-10 ">
       <BreadCrumbs path={path} />
       <div className="flex justify-between m-4">
-      <div className="justify-self-center self-center col-start-2">
+        <div className="justify-self-center self-center col-start-2">
           <Link
             to="/input-students"
             className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
@@ -126,7 +158,7 @@ const SortStudentsPage = () => {
             min={2}
           />
         </div>
-        
+
         <div className="justify-self-end self-center col-start-3">
           <button
             className="justify-self-end bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
@@ -143,19 +175,21 @@ const SortStudentsPage = () => {
         </div>
       </div>
       {savedGroups.length > 0 ? (
-          <SavedGroups
-            savedGroups={savedGroups}
-            setSorted={setSorted}
-            deleteGroup={deleteSavedGroup}
-          />
-        ) : null}
-      <div className="flex">
-        {
-          currentSorted.groups.map((group, index) => {
-            return <Group index={index} group={group} stats={currentSorted.stats[index]} students={students} key={index} />
-          })
-        }
-      </div>
+        <SavedGroups
+          savedGroups={savedGroups}
+          setSorted={setSorted}
+          deleteGroup={deleteSavedGroup}
+        />
+      ) : null}
+      <DndContext onDragEnd={handleDragEnd}>
+        <div className="flex">
+          {
+            currentSorted.groups.map((group, index) => {
+              return <Group index={index} group={group} stats={currentSorted.stats[index]} students={students} key={index} />
+            })
+          }
+        </div>
+      </DndContext>
       <div
         className={
           savedGroups.length > 0 ? "grid grid-cols-3" : "grid grid-cols-2"

@@ -11,8 +11,7 @@ import { IGroups } from "../../interfaces/groupsInterface";
 function stepOne(astudents: IStudent[], split: number) {
   const groups: number[][] = Array.from({ length: split }, () => []);;
 
-  const UnShuffledstudents = astudents;
-  const students = shuffle(UnShuffledstudents);
+  const students = shuffle([...astudents]);
 
   const assignedStudents = new Set<number>();
 
@@ -55,8 +54,8 @@ function stepOne(astudents: IStudent[], split: number) {
 
     if (added) continue;
 
-    // Case Three: A friend has a mutual friendship
-    for (const friendId of student.friends) {
+     // Case Three: A friend has a mutual friendship
+     for (const friendId of student.friends) {
       if (added) break;
       
       // Skip if friend is already assigned
@@ -96,6 +95,8 @@ const sortStudents = (allStudents: IStudent[], split: number): IGroups => {
   const maxIterations = 50000;
 
   let groups = stepOne(allStudents, split);
+  
+  const AcceptableSizeDeviation = split * 0.08; // variable deviation based on how many groups to split into
 
   while (allFriends == false || acceptableSizes == false) {
     if (iterations > maxIterations) {
@@ -123,7 +124,7 @@ const sortStudents = (allStudents: IStudent[], split: number): IGroups => {
     if (
       groups.every((group) => {
         // Check if group size doesn't differ by more than 10% from goal
-        return Math.abs(group.length - goalSize) / goalSize <= 0.1;
+        return Math.abs(group.length - goalSize) / goalSize <= AcceptableSizeDeviation;
       })
     ) {
       acceptableSizes = true;
@@ -133,7 +134,6 @@ const sortStudents = (allStudents: IStudent[], split: number): IGroups => {
   }
 
   const stats: IStats[] = testFunction(allStudents, groups);
-  console.log(stats)
   return { groups, iterations, stats };
 };
 

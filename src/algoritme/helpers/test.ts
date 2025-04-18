@@ -7,6 +7,7 @@ export interface IStats {
   leerlingenZonderVrienden: number[]; // Veranderd naar array met IDs van leerlingen zonder vrienden
   gemiddeldCognitief: number;
   gemiddeldGedrag: number;
+  duplicates: number[];
 }
 
 function testFunction(leerlingen: IStudent[], groups: number[][]) {
@@ -23,6 +24,7 @@ function testFunction(leerlingen: IStudent[], groups: number[][]) {
       leerlingenZonderVrienden: [], // Veranderd naar array met IDs van leerlingen zonder vrienden
       gemiddeldCognitief: 0,
       gemiddeldGedrag: 0,
+      duplicates: []
     };
 
     // Tel jongens en meisjes
@@ -34,6 +36,10 @@ function testFunction(leerlingen: IStudent[], groups: number[][]) {
       }
     });
 
+    const duplicates = groepIds.filter((item, index) => groepIds.indexOf(item) !== index);
+    if (duplicates.length > 0) {
+      stats.duplicates = duplicates;
+    }
     // Check vrienden en bereken gemiddeldes
     let totaalCognitief = 0;
     let totaalGedrag = 0;
@@ -50,6 +56,8 @@ function testFunction(leerlingen: IStudent[], groups: number[][]) {
       if (!heeftVriendenInGroep) {
         stats.leerlingenZonderVrienden.push(id);
       }
+
+      // check for duplicates
 
       // Tel op voor gemiddeldes
       totaalCognitief += leerling.cognitive;
