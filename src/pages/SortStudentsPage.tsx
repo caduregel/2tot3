@@ -208,6 +208,7 @@ const SortStudentsPage = () => {
           savedGroups={savedGroups}
           setSorted={setSorted}
           deleteGroup={deleteSavedGroup}
+          students={students}
         />
       ) : null}
       <DndContext onDragEnd={handleDragEnd}>
