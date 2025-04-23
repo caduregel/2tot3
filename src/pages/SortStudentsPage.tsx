@@ -28,7 +28,9 @@ const SortStudentsPage = () => {
   const [saveGroupName, setSaveGroupName] = useState<string>("");
 
   const [isDropped, setIsDropped] = useState(false);
-console.log(isDropped)
+
+  console.log(isDropped)
+
   useEffect(() => {
     localStorage.setItem("savedGroups", JSON.stringify(savedGroups));
   }, [savedGroups]);
