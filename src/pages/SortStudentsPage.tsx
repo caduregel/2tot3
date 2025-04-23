@@ -7,6 +7,7 @@ import SavedGroups from "../components/SavedGroups/SavedGroups";
 import Group from "../components/Group";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import testFunction from "../algoritme/helpers/test";
+import SortSettingsModal from "../components/SortSettingsModal";
 
 const SortStudentsPage = () => {
   const [savedGroups, setSavedGroups] = useState<ISavedGroups[]>(
@@ -16,20 +17,19 @@ const SortStudentsPage = () => {
   );
 
   const [split, setSplit] = useState<number>(2);
+  const [groupSizeDeviation, setGroupSizeDeviation] = useState<number>(30);
+  const [cognitiveDeviation, setCognitiveDeviation] = useState<number>(30);
+  const [socialDeviation, setSocialDeviation] = useState<number>(30);
 
   const students = JSON.parse(localStorage.getItem("students") || "{}");
 
   const [currentSorted, setCurrentSorted] = useState<IGroups>(
     localStorage.getItem("sorted")
       ? JSON.parse(localStorage.getItem("sorted") || "{}")
-      : sortStudents(students, split),
+      : sortStudents(students, split, groupSizeDeviation, cognitiveDeviation, socialDeviation),
   );
 
   const [saveGroupName, setSaveGroupName] = useState<string>("");
-
-  const [isDropped, setIsDropped] = useState(false);
-
-  console.log(isDropped)
 
   useEffect(() => {
     localStorage.setItem("savedGroups", JSON.stringify(savedGroups));
@@ -91,7 +91,7 @@ const SortStudentsPage = () => {
   };
 
   const handleNewSorted = () => {
-    const newSorted = sortStudents(students, split);
+    const newSorted = sortStudents(students, split, groupSizeDeviation, cognitiveDeviation, socialDeviation);
     setCurrentSorted(newSorted);
   };
 
@@ -101,6 +101,41 @@ const SortStudentsPage = () => {
       setSplit(newSplit);
     }
   };
+
+  const handleGroupSizeDeviationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newDeviation: number = Number(event.target.value);
+    if (newDeviation >= 10 && newDeviation <= 100) {
+      setGroupSizeDeviation(newDeviation);
+    }
+  };
+
+  const handleCognitiveDeviation = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newDeviation: number = Number(event.target.value);
+    if (newDeviation >= 10 && newDeviation <= 100) {
+      setCognitiveDeviation(newDeviation);
+    }
+  };
+  
+  const handleSocialDeviation = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newDeviation: number = Number(event.target.value);
+    if (newDeviation >= 10 && newDeviation <= 100) {
+      setSocialDeviation(newDeviation);
+    }
+  };
+
+  const settingsProps = {
+    split: split,
+    handleSplitChange: handleSplitChange,
+
+    groupSizeDeviation: groupSizeDeviation,
+    handleGroupSizeDeviation: handleGroupSizeDeviationChange,
+
+    cognitiveDeviation: cognitiveDeviation,
+    handleCognitiveDeviation: handleCognitiveDeviation,
+
+    socialDeviation: socialDeviation,
+    handleSocialDeviation: handleSocialDeviation,
+  }
 
   const handleDragEnd = (event: DragEndEvent) => {
     const studentId = typeof event.active.id === "string" ? event.active.id.split("-")[1] : "";
@@ -130,7 +165,6 @@ const SortStudentsPage = () => {
       iterations: currentSorted.iterations,
       stats: newStats,
     });
-    setIsDropped(true);
   };
   return (
     <div className="flex-flex-col mb-10 ">
@@ -151,16 +185,7 @@ const SortStudentsPage = () => {
           </Link>
         </div>
         <div>
-          <button>Aantal groepen</button>
-          <input
-            className="bg-gray-200 p-1 m-2 rounded-sm max-w-10"
-            placeholder="Aantal groepen..."
-            type="number"
-            value={split}
-            onChange={handleSplitChange}
-            max={5}
-            min={2}
-          />
+          <SortSettingsModal {...settingsProps}/>
         </div>
 
         <div className="justify-self-end self-center col-start-3">

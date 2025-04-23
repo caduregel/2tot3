@@ -87,18 +87,19 @@ function stepOne(astudents: IStudent[], split: number) {
   return groups;
 }
 
-const sortStudents = (allStudents: IStudent[], split: number): IGroups => {
+const sortStudents = (allStudents: IStudent[], split: number, groupSizeDeviation: number, cognitiveDeviation: number, socialDeviation: number): IGroups => {
   let allFriends = false;
   let acceptableSizes = false;
+  let acceptableCognitive = false;
+  let acceptableSocial = false;
 
   let iterations = 0;
   const maxIterations = 50000;
 
   let groups = stepOne(allStudents, split);
   
-  const AcceptableSizeDeviation = split * 0.08; // variable deviation based on how many groups to split into
-
-  while (allFriends == false || acceptableSizes == false) {
+  
+  while (allFriends == false || acceptableSizes == false || acceptableCognitive == false || acceptableSocial == false) {
     if (iterations > maxIterations) {
       console.log("to many iterations");
       break;
@@ -124,12 +125,48 @@ const sortStudents = (allStudents: IStudent[], split: number): IGroups => {
     if (
       groups.every((group) => {
         // Check if group size doesn't differ by more than 10% from goal
-        return Math.abs(group.length - goalSize) / goalSize <= AcceptableSizeDeviation;
+        return Math.abs(group.length - goalSize) / goalSize <= (groupSizeDeviation / 100);
       })
     ) {
       acceptableSizes = true;
     } else {
       acceptableSizes = false;
+    }
+
+    // check for cognitive deviation
+    const averageCognitive = allStudents.reduce((sum, student) => sum + student.cognitive, 0) / allStudents.length;
+    if (
+      groups.every((group) => {
+      const groupCognitiveAverage = group.reduce((sum, studentId) => {
+        const student = allStudents.find((s) => s.index === studentId);
+        return student ? sum + student.cognitive : sum;
+      }, 0) / group.length;
+
+      // Check if group cognitive average doesn't differ by more than the allowed deviation
+      return Math.abs(groupCognitiveAverage - averageCognitive) / averageCognitive <= (cognitiveDeviation / 100);
+      })
+    ) {
+      acceptableCognitive = true;
+    } else {
+      acceptableCognitive = false;
+    }
+
+    // check for social deviation
+    const averageSocial = allStudents.reduce((sum, student) => sum + student.cognitive, 0) / allStudents.length;
+    if (
+      groups.every((group) => {
+      const groupSocialDeviation = group.reduce((sum, studentId) => {
+        const student = allStudents.find((s) => s.index === studentId);
+        return student ? sum + student.social : sum;
+      }, 0) / group.length;
+
+      // Check if group cognitive average doesn't differ by more than the allowed deviation
+      return Math.abs(groupSocialDeviation - averageSocial) / averageSocial <= (socialDeviation / 100);
+      })
+    ) {
+      acceptableSocial = true;
+    } else {
+      acceptableSocial = false;
     }
   }
 
