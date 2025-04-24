@@ -1,40 +1,63 @@
+// FileUploader.tsx
 import React, { useEffect, useState } from 'react';
-import generateFromCSV from '../helpers/generateFromCSV';
+import generateFromExcel from '../helpers/generateFromExcell';
+import { IconContext } from 'react-icons';
+import { MdOutlineFileUpload } from 'react-icons/md';
 
-
-interface IFileUplaoderProps {
-    setStudents: React.Dispatch<React.SetStateAction<any[]>>;
+// Define the Student interface
+export interface IStudent {
+  index: number;
+  name: string;
+  cognitive: number;
+  social: number;
+  gender: string;
+  friends: number[];
 }
 
-const FileUploader: React.FC<IFileUplaoderProps> = ({ setStudents }) => {
-    const [file, setFile] = useState<File | null>(null);
+interface IFileUploaderProps {
+  setStudents: React.Dispatch<React.SetStateAction<IStudent[]>>;
+}
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files) {
-            setFile(event.target.files[0]);
-        }
-    };
+const FileUploader: React.FC<IFileUploaderProps> = ({ setStudents }) => {
+  const [file, setFile] = useState<File | null>(null);
 
-    useEffect(() => {
-        if (file) {
-            try {
-                generateFromCSV(file).then((students) => {
-                    setStudents(students);
-                })
-            } catch (error) {
-                console.log("An error has occured: " + error)
-            }
-        }
-    }, [file]);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setFile(event.target.files[0]);
+    }
+  };
 
-    return (
-        <div >
-            <label htmlFor="file-upload" className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 hover:cursor-pointer">
-                Upload CSV
-            </label>
-            <input id="file-upload" type="file" onChange={handleFileChange} style={{ display: 'none' }} accept='.csv' />
-        </div>
-    );
+  useEffect(() => {
+    if (file) {
+      try {
+        generateFromExcel(file).then((students) => {
+          setStudents(students);
+        }).catch((error) => {
+          console.error("Error parsing Excel file:", error);
+        });
+      } catch (error) {
+        console.error("An error has occurred: ", error);
+      }
+    }
+  }, [file, setStudents]);
+
+  return (
+    <div>
+      <label htmlFor="file-upload" className="flex  items-center bg-gray-200 p-2 rounded-sm hover:bg-gray-300 hover:cursor-pointer">
+        <IconContext.Provider value={{ className: "text-gray-500 mr-2 hover:cursor-pointer w-5 h-5 hover:cursor-pointer" }}>
+          <MdOutlineFileUpload />
+        </IconContext.Provider>
+        Upload Excel
+      </label>
+      <input
+        id="file-upload"
+        type="file"
+        onChange={handleFileChange}
+        style={{ display: 'none' }}
+        accept='.xlsx, .xls'
+      />
+    </div>
+  );
 };
 
 export default FileUploader;

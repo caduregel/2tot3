@@ -36,7 +36,7 @@ const SearchStudentsDropdown: FC<Props> = ({ students, handleAddFriend, currentS
             <select
                 className={students[currentStudentIndex].friends[SelectorIndex]
                     ? "bg-gray-200 mr-5 p-1 rounded-sm hover:cursor-pointer"
-                    : "bg-gray-200 mr-5 p-1 rounded-sm hover:cursor-pointer text-gray-500"}
+                    : "bg-gray-200 mr-5 p-1 rounded-sm hover:cursor-pointer"}
                 value={
                     String(
                         students[currentStudentIndex].friends[SelectorIndex] ?? ''

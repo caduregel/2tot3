@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { generateRandomStudents } from "../helpers/generateRandomStudents";
 import BreadCrumbs, { IPath } from "../components/BreadCrumbs";
 import FileUploader from "../components/FileUploader";
+import StudentsXLSXExport from "../components/StudentsXLSXExport";
 
 function Home() {
   const [students, setStudents] = useState<IStudent[]>(
@@ -128,6 +129,8 @@ function Home() {
               {students.length == 1 ? "leerling" : "leerlingen"}
             </p>
             <FileUploader setStudents={setStudents} />
+            <StudentsXLSXExport students={students} />
+
             <button
               className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300 m-4 hover:cursor-pointer"
               onClick={fillRandom}
@@ -157,12 +160,6 @@ function Home() {
                 sorteren.
               </p>
             )}
-          </div>
-          <div className="m-5 flex flex-col">
-            <label className="m-2 mt-0">
-              In hoeveel groepen wil je de leerlingen verdelen?
-            </label>
-           
           </div>
           <div>
             <div className="grid grid-cols-8 gap-5 p-3 justify-around items-center bg-gray-50 mb-3 pl-5">
