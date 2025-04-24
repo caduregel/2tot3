@@ -3,7 +3,7 @@ import testFunction from '../../algoritme/helpers/test';
 import { IStudent } from '../../interfaces/studentInterface';
 
 // This function will take your groups data and convert it to an Excel file
-const exportToExcel = (groups: number[][], students: IStudent[]) => {
+const exportToExcel = (groups: number[][], students: IStudent[], exportName: string) => {
   // Create a workbook
   const workbook = XLSX.utils.book_new();
   const stats = testFunction(students, groups);
@@ -68,20 +68,21 @@ const exportToExcel = (groups: number[][], students: IStudent[]) => {
   XLSX.utils.book_append_sheet(workbook, detailedStudentSheet, 'Gedetailleerde Leerlingen');
 
   // Generate Excel file and trigger download
-  XLSX.writeFile(workbook, 'Groepen.xlsx');
+  XLSX.writeFile(workbook, `${exportName}.xlsx`);
 };
 
 // A button component that triggers the Excel export
 interface ExportToExcelButtonProps {
   groups: number[][];
   students: IStudent[];
+  exportName: string;
 }
 
-const ExportToExcelButton: React.FC<ExportToExcelButtonProps> = ({ groups, students }) => {
+const ExportToExcelButton: React.FC<ExportToExcelButtonProps> = ({ groups, students, exportName }) => {
   return (
     <button
       className="bg-green-200 p-1 mb-2 mr-5 ml-5 grid-cols-8 col-start-8 col-end-9 rounded-sm hover:cursor-pointer hover:bg-green-300"
-      onClick={() => exportToExcel(groups, students)}
+      onClick={() => exportToExcel(groups, students, exportName)}
     >
       Exporteer naar Excel
     </button>

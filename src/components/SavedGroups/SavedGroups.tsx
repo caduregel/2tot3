@@ -41,7 +41,7 @@ const SavedGroups: React.FC<ISavedGroupsProps> = ({ savedGroups, setSorted, dele
                                         className='bg-red-200 p-1 mb-2 mr-5 ml-5 grid-cols-8 col-start-8 col-end-9 rounded-sm hover:cursor-pointer hover:bg-red-300'
                                         onClick={() => { handleDelete(index) }}>
                                         verwijder</button>
-                                        <ExportToExcelButton groups={save.groups} students={students}/>
+                                        <ExportToExcelButton groups={save.groups} students={students} exportName={save.name} />
                             </div>
                             <div className='grid grid-cols-2'>
                                 <div>
