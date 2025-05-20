@@ -24,11 +24,14 @@ const generateFromExcel = async (file: File): Promise<IStudent[]> => {
         // Process student data
         let students: IStudent[] = [];
         
+        let headerRow = false;
+
         rows.forEach((student: any[], index) => {
           // Skip header row if present
           if (index === 0 && typeof student[0] === 'string' && 
              (student[0].toLowerCase().includes('naam') || 
               student[0].toLowerCase().includes('name'))) {
+                headerRow = true
             return;
           }
           
@@ -37,9 +40,9 @@ const generateFromExcel = async (file: File): Promise<IStudent[]> => {
           const friendTwoName = student[5];
           const friendThreeName = student[6];
           
-          const friendOneID = rows.findIndex(s => s[0] === friendOneName);
-          const friendTwoID = rows.findIndex(s => s[0] === friendTwoName);
-          const friendThreeID = rows.findIndex(s => s[0] === friendThreeName);
+          const friendOneID = rows.findIndex(s => s[0] === friendOneName) - (headerRow ? 1 : 0);
+          const friendTwoID = rows.findIndex(s => s[0] === friendTwoName) - (headerRow ? 1 : 0);
+          const friendThreeID = rows.findIndex(s => s[0] === friendThreeName) - (headerRow ? 1 : 0);
           
           // Create new student object
           const newStudent: IStudent = {
